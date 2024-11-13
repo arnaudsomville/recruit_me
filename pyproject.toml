@@ -16,7 +16,6 @@ dependencies = [
     "fastapi>=0.110.1",
     "uvicorn>=0.29.0",
     "pandas>=2.2.3",
-    "jinja>=1.2",
 ]
 readme = "README.md"
 license = {text = "MIT"}
