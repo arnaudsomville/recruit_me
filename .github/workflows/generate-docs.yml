@@ -21,16 +21,20 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Install dependencies
+      - name: Install PDM
         run: |
           python -m pip install --upgrade pip
-          pip install sphinx sphinx_rtd_theme  # Installer Sphinx et les extensions nécessaires
-          pip install -r requirements.txt  # Optionnel, si tes dépendances sont listées ici
+          pip install pdm
+
+      - name: Install dependencies with PDM
+        run: pdm install
+        env:
+          PDM_IGNORE_SAVED_PYTHON: "1"
 
       - name: Build documentation
         working-directory: docs
         run: |
-          make html  # Génère la documentation en HTML dans docs/_build/html
+          pdm run make html  # Utiliser PDM pour générer la doc
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
