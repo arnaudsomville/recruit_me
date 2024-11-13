@@ -25,6 +25,9 @@ def send_email(email_data: EmailModel) -> bool:
         msg['To'] = email_data.recipient.email
         msg['Subject'] = email_data.object
 
+        msg['Disposition-Notification-To'] = MainConfig().user.email
+        msg['Return-Receipt-To'] = MainConfig().user.email
+
         msg.attach(MIMEText(email_data.content, 'plain'))
 
         if email_data.attached_file:
@@ -49,7 +52,8 @@ if __name__ == '__main__': #pragma: no-cover
     email = EmailModel(
         recipient=EmailRecipient(
             name='Stéphane',
-            email='arnaudsomville@hotmail.fr'
+            email='arnaudsomville@hotmail.fr',
+            company='Tesla'
         ),
         content="Recruit me plz",
         attached_file=Path.home().joinpath(f"{MainConfig().home_folder}/test.pdf")
