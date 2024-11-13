@@ -30,14 +30,15 @@ def send_email(email_data: EmailModel) -> bool:
 
         msg.attach(MIMEText(email_data.content, 'plain'))
 
-        if email_data.attached_file:
-            if not email_data.attached_file.exists():
-                raise FileNotFoundError("The attachement file does not exist.")
-            with open(email_data.attached_file, 'rb') as attachment_file:
-                filename = email_data.attached_file.name
-                part = MIMEApplication(attachment_file.read(), Name=filename)
-                part['Content-Disposition'] = f'attachment; filename="{filename}"'
-                msg.attach(part)
+        if len(email_data.attached_files)>0:
+            for attached_file in email_data.attached_files:
+                if not attached_file.exists():
+                    raise FileNotFoundError("The attachement file does not exist.")
+                with open(attached_file, 'rb') as attachment_file:
+                    filename = attached_file.name
+                    part = MIMEApplication(attachment_file.read(), Name=filename)
+                    part['Content-Disposition'] = f'attachment; filename="{filename}"'
+                    msg.attach(part)
 
         with smtplib.SMTP(MainConfig().user.smtp_server, MainConfig().user.smtp_port) as server:
             server.starttls()  # Sécurise la connexion
@@ -56,6 +57,6 @@ if __name__ == '__main__': #pragma: no-cover
             company='Tesla'
         ),
         content="Recruit me plz",
-        attached_file=Path.home().joinpath(f"{MainConfig().home_folder}/test.pdf")
+        attached_files=[Path.home().joinpath(f"{MainConfig().home_folder}/test.pdf")]
     )
     send_email(email)

@@ -18,7 +18,7 @@ class EmailModel(BaseModel):
     recipient: EmailRecipient
     content: str
     object: str = 'Interest in Career Opportunity'
-    attached_file: Path | None = None
+    attached_files: list[Path] = []
 
 class AnswerType(StrEnum):
     WAITING ='WAITING'

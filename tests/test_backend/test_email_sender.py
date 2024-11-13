@@ -31,8 +31,8 @@ def test_email_sending_nominal_with_file()->None:
     """Test email sending in nominal case."""
 
     #Creation of a fake pdf
-    attached_file = Path.home().joinpath(f"{MainConfig().home_folder}/{uuid.uuid4()}.pdf")
-    with open(attached_file, 'wb') as f:
+    attached_file = [Path.home().joinpath(f"{MainConfig().home_folder}/{uuid.uuid4()}.pdf")]
+    with open(attached_file[0], 'wb') as f:
         f.write(b"%PDF-1.4\n")
         f.write(b"1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n")
         f.write(b"2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n")
@@ -49,7 +49,7 @@ def test_email_sending_nominal_with_file()->None:
             position='CEO'
         ),
         content="Recruit me plz",
-        attached_file=attached_file
+        attached_files=attached_file
     )
     with (
         patch.object(smtplib.SMTP, 'starttls', return_value = None),
@@ -69,7 +69,7 @@ def test_email_sending_not_nominal_file_does_not_exist()->None:
             position='CEO'
         ),
         content="Recruit me plz",
-        attached_file=Path.home().joinpath(f"{MainConfig().home_folder}/{uuid.uuid4()}.pdf") #Does not exist
+        attached_files=[Path.home().joinpath(f"{MainConfig().home_folder}/{uuid.uuid4()}.pdf")] #Does not exist
     )
     assert not send_email(email)
 

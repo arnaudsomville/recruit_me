@@ -1,0 +1,13 @@
+Dear {{ recipient_name }},
+
+I am reaching out to express my strong interest in joining {{ recipient_company }} as a dedicated member of your team. With my background and expertise, I am excited about the possibility of contributing to your projects and supporting your mission.
+
+In my previous roles, I have honed skills that I believe align well with the values and goals of {{ recipient_company }}. I am particularly impressed by the impactful work your organization has achieved, and I am confident that my commitment and abilities would add value to your efforts.
+
+I would love the opportunity to discuss how my experience and skills could be of benefit to {{ recipient_company }} in a role such as {{ recipient_position }}. Please feel free to reach out at your convenience; I am eager to share my ideas and learn more about how I can contribute to your ongoing success.
+
+Thank you very much for considering my application. I look forward to the possibility of working together.
+
+Best regards,
+{{ sender_name }}  
+{{ sender_email }}

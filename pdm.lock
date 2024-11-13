@@ -5,7 +5,7 @@
 groups = ["default", "dev", "doc", "test"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:c81c1dde525e30225adb06c3da8cb22785a25a25e6d6b1e18e7043f686be3c29"
+content_hash = "sha256:73aa1ed951733af273c83645b4edb7f037e0709a14a26c6ca244a16441054f0f"
 
 [[package]]
 name = "alabaster"
@@ -497,6 +497,15 @@ groups = ["dev"]
 files = [
     {file = "installer-0.7.0-py3-none-any.whl", hash = "sha256:05d1933f0a5ba7d8d6296bb6d5018e7c94fa473ceb10cf198a92ccea19c27b53"},
     {file = "installer-0.7.0.tar.gz", hash = "sha256:a26d3e3116289bb08216e0d0f7d925fcef0b0194eedfa0c944bcaaa106c4b631"},
+]
+
+[[package]]
+name = "jinja"
+version = "1.2"
+summary = ""
+groups = ["default"]
+files = [
+    {file = "Jinja-1.2.tar.gz", hash = "sha256:36252f3d0356008a31a537a31cfba189f7b5898b8e2da454f72ea5f987db8b31"},
 ]
 
 [[package]]

@@ -1,0 +1,14 @@
+To: John Doe <johndoe@example.com>
+From: Jane Smith <janesmith@example.com>
+Date: 13/11/2023
+
+Subject: Job Application
+
+Dear John Doe,
+
+I am reaching out to express my interest in joining Example Corp as a Software Engineer. With my experience and dedication, I am excited about the opportunity to contribute to your team.
+
+Thank you for considering my application.
+
+Best regards,
+Jane Smith

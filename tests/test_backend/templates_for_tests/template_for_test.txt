@@ -1,0 +1,14 @@
+To: {{ recipient_name }} <{{ recipient_email }}>
+From: {{ sender_name }} <{{ sender_email }}>
+Date: {{ current_date }}
+
+Subject: Job Application
+
+Dear {{ recipient_name }},
+
+I am reaching out to express my interest in joining {{ recipient_company }} as a {{ recipient_position }}. With my experience and dedication, I am excited about the opportunity to contribute to your team.
+
+Thank you for considering my application.
+
+Best regards,
+{{ sender_name }}

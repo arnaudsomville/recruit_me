@@ -14,6 +14,10 @@ def verify_home_folder()->None:
     conf_file = home_folder.joinpath('configuration.yaml')
     if not conf_file.exists():
         shutil.copy(Path(__file__).parents[1].joinpath('configuration_template.yaml'),conf_file)
+    
+    template_folder = home_folder.joinpath('template_examples')
+    if not template_folder.exists():
+        shutil.copytree(Path(__file__).parents[1].joinpath('template_examples'),template_folder)
 
 if __name__ == '__main__': #pragma: no-cover
     verify_home_folder()
