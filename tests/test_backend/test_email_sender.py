@@ -14,7 +14,9 @@ def test_email_sending_nominal_no_file()->None:
     email = EmailModel(
         recipient=EmailRecipient(
             name='Elon Musk',
-            email='elonmusk@real_email.com'
+            email='elonmusk@real_email.com',
+            company='SpaceX',
+            position='CEO'
         ),
         content="Recruit me plz",
     )
@@ -42,7 +44,9 @@ def test_email_sending_nominal_with_file()->None:
     email = EmailModel(
         recipient=EmailRecipient(
             name='Elon Musk',
-            email='elonmusk@real_email.com'
+            email='elonmusk@real_email.com',
+            company='SpaceX',
+            position='CEO'
         ),
         content="Recruit me plz",
         attached_file=attached_file
@@ -60,10 +64,36 @@ def test_email_sending_not_nominal_file_does_not_exist()->None:
     email = EmailModel(
         recipient=EmailRecipient(
             name='Elon Musk',
-            email='elonmusk@real_email.com'
+            email='elonmusk@real_email.com',
+            company='SpaceX',
+            position='CEO'
         ),
         content="Recruit me plz",
         attached_file=Path.home().joinpath(f"{MainConfig().home_folder}/{uuid.uuid4()}.pdf") #Does not exist
     )
-    print(email.attached_file)
     assert not send_email(email)
+
+def test_email_sending_not_nominal_error()->None:
+    """Test email sending if file does not exist."""
+    email = EmailModel(
+        recipient=EmailRecipient(
+            name='Elon Musk',
+            email='elonmusk@real_email.com',
+            company='SpaceX',
+            position='CEO'
+        ),
+        content="Recruit me plz",
+    )
+    def error_fct()->None:
+        """Raise an error for the purpose of this test.
+
+        Raises:
+            RuntimeError: Error for the mock.
+        """
+        raise RuntimeError("An error occured sending the email")
+    with (
+        patch.object(smtplib.SMTP, 'starttls', return_value = None),
+        patch.object(smtplib.SMTP, 'login', return_value = None),
+        patch.object(smtplib.SMTP, 'send_message', side_effect=error_fct),
+    ):
+        assert not send_email(email)

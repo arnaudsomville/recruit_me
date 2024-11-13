@@ -15,6 +15,7 @@ dependencies = [
     "pydantic>=2.6.4",
     "fastapi>=0.110.1",
     "uvicorn>=0.29.0",
+    "pandas>=2.2.3",
 ]
 readme = "README.md"
 license = {text = "MIT"}
