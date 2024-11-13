@@ -19,7 +19,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: '3.11'
 
       - name: Install PDM
         run: |
@@ -27,7 +27,9 @@ jobs:
           pip install pdm
 
       - name: Install dependencies with PDM
-        run: pdm install
+        run: |
+          pdm cache clear
+          pdm install
         env:
           PDM_IGNORE_SAVED_PYTHON: "1"
 
