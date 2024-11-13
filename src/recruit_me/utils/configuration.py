@@ -6,7 +6,6 @@ from typing import ClassVar
 import warnings
 from confz import ConfigSource, BaseConfig, EnvSource, FileSource
 from confz.base_config import BaseConfigMetaclass
-from pydantic import SecretStr
 
 _DEFAULT_CONF_FILE_PATH = Path.home().joinpath('.recruit_me/configuration.yaml')
 _TEMPLATE_CONF_FILE_PATH = Path(__file__).parents[1].joinpath('configuration_template.yaml')
@@ -28,14 +27,21 @@ def get_config_file_path() -> Path:
     else:
         raise FileNotFoundError("Error : No configuration found, even the template !")
 
-class UserConfModel(BaseConfig, metaclass=BaseConfigMetaclass):
+class EmailConf(BaseConfig, metaclass=BaseConfigMetaclass):
     """Configuration model for user."""
+
     name: str
     email: str
-    credential: SecretStr
+    password: str
+    smtp_server: str
+    smtp_port: int
+
 
 class MainConfig(BaseConfig, metaclass=BaseConfigMetaclass):
-    user: UserConfModel
+    """Configuration of the project."""
+
+    user: EmailConf
+    home_folder: str
 
     CONFIG_SOURCES: ClassVar[list[ConfigSource]] = [
         FileSource(file=get_config_file_path()),

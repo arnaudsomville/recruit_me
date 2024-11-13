@@ -1,4 +1,7 @@
 user:
   name: Arnaud Somville
   email: arnaud.somville@estaca.eu
-  credential: ObviouslyNotMyActualPassword
+  password: ObviouslyNotMyActualPassword
+  smtp_server: smtp.office365.com
+  smtp_port: 587
+home_folder: .recruit_me
