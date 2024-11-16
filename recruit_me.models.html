@@ -18,7 +18,8 @@
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="recruit_me.backend package" href="recruit_me.backend.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,56 +41,83 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">recruit_me.models package</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-recruit_me.models.data_models">recruit_me.models.data_models module</a><ul>
-<li><a class="reference internal" href="#recruit_me.models.data_models.AnswerType"><code class="docutils literal notranslate"><span class="pre">AnswerType</span></code></a><ul>
-<li><a class="reference internal" href="#recruit_me.models.data_models.AnswerType.ACCEPTED"><code class="docutils literal notranslate"><span class="pre">AnswerType.ACCEPTED</span></code></a></li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.AnswerType.REFUSED"><code class="docutils literal notranslate"><span class="pre">AnswerType.REFUSED</span></code></a></li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.AnswerType.WAITING"><code class="docutils literal notranslate"><span class="pre">AnswerType.WAITING</span></code></a></li>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="recruit_me.html">recruit_me package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="recruit_me.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="recruit_me.backend.html">recruit_me.backend package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">recruit_me.models package</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel</span></code></a><ul>
-<li><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.amount_of_email_sent"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.amount_of_email_sent</span></code></a></li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.answer"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.answer</span></code></a></li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.first_sent"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.first_sent</span></code></a></li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.last_sent"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.last_sent</span></code></a></li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.model_computed_fields"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.model_computed_fields</span></code></a></li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.model_config"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.model_config</span></code></a></li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.model_fields"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.model_fields</span></code></a></li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.recipient"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.recipient</span></code></a></li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.to_dict"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.to_dict()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.EmailModel"><code class="docutils literal notranslate"><span class="pre">EmailModel</span></code></a><ul>
-<li><a class="reference internal" href="#recruit_me.models.data_models.EmailModel.attached_files"><code class="docutils literal notranslate"><span class="pre">EmailModel.attached_files</span></code></a></li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.EmailModel.content"><code class="docutils literal notranslate"><span class="pre">EmailModel.content</span></code></a></li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.EmailModel.model_computed_fields"><code class="docutils literal notranslate"><span class="pre">EmailModel.model_computed_fields</span></code></a></li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.EmailModel.model_config"><code class="docutils literal notranslate"><span class="pre">EmailModel.model_config</span></code></a></li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.EmailModel.model_fields"><code class="docutils literal notranslate"><span class="pre">EmailModel.model_fields</span></code></a></li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.EmailModel.object"><code class="docutils literal notranslate"><span class="pre">EmailModel.object</span></code></a></li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.EmailModel.recipient"><code class="docutils literal notranslate"><span class="pre">EmailModel.recipient</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient"><code class="docutils literal notranslate"><span class="pre">EmailRecipient</span></code></a><ul>
-<li><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient.company"><code class="docutils literal notranslate"><span class="pre">EmailRecipient.company</span></code></a></li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient.email"><code class="docutils literal notranslate"><span class="pre">EmailRecipient.email</span></code></a></li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient.model_computed_fields"><code class="docutils literal notranslate"><span class="pre">EmailRecipient.model_computed_fields</span></code></a></li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient.model_config"><code class="docutils literal notranslate"><span class="pre">EmailRecipient.model_config</span></code></a></li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient.model_fields"><code class="docutils literal notranslate"><span class="pre">EmailRecipient.model_fields</span></code></a></li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient.name"><code class="docutils literal notranslate"><span class="pre">EmailRecipient.name</span></code></a></li>
-<li><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient.position"><code class="docutils literal notranslate"><span class="pre">EmailRecipient.position</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="recruit_me.html#module-recruit_me">Module contents</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-recruit_me.models">Module contents</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="recruit_me.html">recruit_me package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="recruit_me.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="recruit_me.backend.html">recruit_me.backend package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">recruit_me.models package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-recruit_me.models.data_models">recruit_me.models.data_models module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-recruit_me.models">Module contents</a></li>
 </ul>
 </li>
 </ul>
-</div>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="recruit_me.html#module-recruit_me">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">recruit_me.models package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-recruit_me.models.data_models">recruit_me.models.data_models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#recruit_me.models.data_models.AnswerType"><code class="docutils literal notranslate"><span class="pre">AnswerType</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.AnswerType.ACCEPTED"><code class="docutils literal notranslate"><span class="pre">AnswerType.ACCEPTED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.AnswerType.REFUSED"><code class="docutils literal notranslate"><span class="pre">AnswerType.REFUSED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.AnswerType.WAITING"><code class="docutils literal notranslate"><span class="pre">AnswerType.WAITING</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.amount_of_email_sent"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.amount_of_email_sent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.answer"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.answer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.first_sent"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.first_sent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.last_sent"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.last_sent</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.model_computed_fields"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.model_computed_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.model_config"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.model_fields"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.model_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.recipient"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.recipient</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.to_dict"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.to_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#recruit_me.models.data_models.EmailModel"><code class="docutils literal notranslate"><span class="pre">EmailModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.EmailModel.attached_files"><code class="docutils literal notranslate"><span class="pre">EmailModel.attached_files</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.EmailModel.content"><code class="docutils literal notranslate"><span class="pre">EmailModel.content</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.EmailModel.model_computed_fields"><code class="docutils literal notranslate"><span class="pre">EmailModel.model_computed_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.EmailModel.model_config"><code class="docutils literal notranslate"><span class="pre">EmailModel.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.EmailModel.model_fields"><code class="docutils literal notranslate"><span class="pre">EmailModel.model_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.EmailModel.object"><code class="docutils literal notranslate"><span class="pre">EmailModel.object</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.EmailModel.recipient"><code class="docutils literal notranslate"><span class="pre">EmailModel.recipient</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient"><code class="docutils literal notranslate"><span class="pre">EmailRecipient</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient.company"><code class="docutils literal notranslate"><span class="pre">EmailRecipient.company</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient.email"><code class="docutils literal notranslate"><span class="pre">EmailRecipient.email</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient.model_computed_fields"><code class="docutils literal notranslate"><span class="pre">EmailRecipient.model_computed_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient.model_config"><code class="docutils literal notranslate"><span class="pre">EmailRecipient.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient.model_fields"><code class="docutils literal notranslate"><span class="pre">EmailRecipient.model_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient.name"><code class="docutils literal notranslate"><span class="pre">EmailRecipient.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient.position"><code class="docutils literal notranslate"><span class="pre">EmailRecipient.position</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-recruit_me.models">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recruit_me.backend.html">recruit_me.backend package</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -104,6 +132,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">src</a></li>
+          <li class="breadcrumb-item"><a href="recruit_me.html">recruit_me package</a></li>
       <li class="breadcrumb-item active">recruit_me.models package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/recruit_me.models.rst.txt" rel="nofollow"> View page source</a>
@@ -312,7 +342,9 @@ mapping of field names to [<cite>FieldInfo</cite>][pydantic.fields.FieldInfo] ob
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="recruit_me.backend.html" class="btn btn-neutral float-left" title="recruit_me.backend package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 

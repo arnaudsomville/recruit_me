@@ -14,4 +14,9 @@ documentation for details.
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-
+   
+   modules
+   recruit_me
+   recruit_me.models
+   recruit_me.backend
+   recruit_me.api
