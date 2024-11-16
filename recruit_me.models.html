@@ -1,0 +1,340 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>recruit_me.models package &mdash; recruit_me 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            recruit_me
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">recruit_me.models package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-recruit_me.models.data_models">recruit_me.models.data_models module</a><ul>
+<li><a class="reference internal" href="#recruit_me.models.data_models.AnswerType"><code class="docutils literal notranslate"><span class="pre">AnswerType</span></code></a><ul>
+<li><a class="reference internal" href="#recruit_me.models.data_models.AnswerType.ACCEPTED"><code class="docutils literal notranslate"><span class="pre">AnswerType.ACCEPTED</span></code></a></li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.AnswerType.REFUSED"><code class="docutils literal notranslate"><span class="pre">AnswerType.REFUSED</span></code></a></li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.AnswerType.WAITING"><code class="docutils literal notranslate"><span class="pre">AnswerType.WAITING</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel</span></code></a><ul>
+<li><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.amount_of_email_sent"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.amount_of_email_sent</span></code></a></li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.answer"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.answer</span></code></a></li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.first_sent"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.first_sent</span></code></a></li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.last_sent"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.last_sent</span></code></a></li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.model_computed_fields"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.model_computed_fields</span></code></a></li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.model_config"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.model_config</span></code></a></li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.model_fields"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.model_fields</span></code></a></li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.recipient"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.recipient</span></code></a></li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.DataframeEntryModel.to_dict"><code class="docutils literal notranslate"><span class="pre">DataframeEntryModel.to_dict()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.EmailModel"><code class="docutils literal notranslate"><span class="pre">EmailModel</span></code></a><ul>
+<li><a class="reference internal" href="#recruit_me.models.data_models.EmailModel.attached_files"><code class="docutils literal notranslate"><span class="pre">EmailModel.attached_files</span></code></a></li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.EmailModel.content"><code class="docutils literal notranslate"><span class="pre">EmailModel.content</span></code></a></li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.EmailModel.model_computed_fields"><code class="docutils literal notranslate"><span class="pre">EmailModel.model_computed_fields</span></code></a></li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.EmailModel.model_config"><code class="docutils literal notranslate"><span class="pre">EmailModel.model_config</span></code></a></li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.EmailModel.model_fields"><code class="docutils literal notranslate"><span class="pre">EmailModel.model_fields</span></code></a></li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.EmailModel.object"><code class="docutils literal notranslate"><span class="pre">EmailModel.object</span></code></a></li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.EmailModel.recipient"><code class="docutils literal notranslate"><span class="pre">EmailModel.recipient</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient"><code class="docutils literal notranslate"><span class="pre">EmailRecipient</span></code></a><ul>
+<li><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient.company"><code class="docutils literal notranslate"><span class="pre">EmailRecipient.company</span></code></a></li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient.email"><code class="docutils literal notranslate"><span class="pre">EmailRecipient.email</span></code></a></li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient.model_computed_fields"><code class="docutils literal notranslate"><span class="pre">EmailRecipient.model_computed_fields</span></code></a></li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient.model_config"><code class="docutils literal notranslate"><span class="pre">EmailRecipient.model_config</span></code></a></li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient.model_fields"><code class="docutils literal notranslate"><span class="pre">EmailRecipient.model_fields</span></code></a></li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient.name"><code class="docutils literal notranslate"><span class="pre">EmailRecipient.name</span></code></a></li>
+<li><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient.position"><code class="docutils literal notranslate"><span class="pre">EmailRecipient.position</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-recruit_me.models">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">recruit_me</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">recruit_me.models package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/recruit_me.models.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="recruit-me-models-package">
+<h1>recruit_me.models package<a class="headerlink" href="#recruit-me-models-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-recruit_me.models.data_models">
+<span id="recruit-me-models-data-models-module"></span><h2>recruit_me.models.data_models module<a class="headerlink" href="#module-recruit_me.models.data_models" title="Link to this heading"></a></h2>
+<p>Contains the definition of basemodels.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.AnswerType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">recruit_me.models.data_models.</span></span><span class="sig-name descname"><span class="pre">AnswerType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/recruit_me/models/data_models.html#AnswerType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#recruit_me.models.data_models.AnswerType" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">StrEnum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.AnswerType.ACCEPTED">
+<span class="sig-name descname"><span class="pre">ACCEPTED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ACCEPTED'</span></em><a class="headerlink" href="#recruit_me.models.data_models.AnswerType.ACCEPTED" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.AnswerType.REFUSED">
+<span class="sig-name descname"><span class="pre">REFUSED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'REFUSED'</span></em><a class="headerlink" href="#recruit_me.models.data_models.AnswerType.REFUSED" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.AnswerType.WAITING">
+<span class="sig-name descname"><span class="pre">WAITING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'WAITING'</span></em><a class="headerlink" href="#recruit_me.models.data_models.AnswerType.WAITING" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.DataframeEntryModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">recruit_me.models.data_models.</span></span><span class="sig-name descname"><span class="pre">DataframeEntryModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_sent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_sent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipient</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient" title="recruit_me.models.data_models.EmailRecipient"><span class="pre">EmailRecipient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">answer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#recruit_me.models.data_models.AnswerType" title="recruit_me.models.data_models.AnswerType"><span class="pre">AnswerType</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount_of_email_sent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/recruit_me/models/data_models.html#DataframeEntryModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#recruit_me.models.data_models.DataframeEntryModel" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.DataframeEntryModel.amount_of_email_sent">
+<span class="sig-name descname"><span class="pre">amount_of_email_sent</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#recruit_me.models.data_models.DataframeEntryModel.amount_of_email_sent" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.DataframeEntryModel.answer">
+<span class="sig-name descname"><span class="pre">answer</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#recruit_me.models.data_models.AnswerType" title="recruit_me.models.data_models.AnswerType"><span class="pre">AnswerType</span></a></em><a class="headerlink" href="#recruit_me.models.data_models.DataframeEntryModel.answer" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.DataframeEntryModel.first_sent">
+<span class="sig-name descname"><span class="pre">first_sent</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span></em><a class="headerlink" href="#recruit_me.models.data_models.DataframeEntryModel.first_sent" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.DataframeEntryModel.last_sent">
+<span class="sig-name descname"><span class="pre">last_sent</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span></em><a class="headerlink" href="#recruit_me.models.data_models.DataframeEntryModel.last_sent" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.DataframeEntryModel.model_computed_fields">
+<span class="sig-name descname"><span class="pre">model_computed_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ComputedFieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#recruit_me.models.data_models.DataframeEntryModel.model_computed_fields" title="Link to this definition"></a></dt>
+<dd><p>A dictionary of computed field names and their corresponding <cite>ComputedFieldInfo</cite> objects.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.DataframeEntryModel.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#recruit_me.models.data_models.DataframeEntryModel.model_config" title="Link to this definition"></a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.DataframeEntryModel.model_fields">
+<span class="sig-name descname"><span class="pre">model_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">FieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'amount_of_email_sent':</span> <span class="pre">FieldInfo(annotation=int,</span> <span class="pre">required=True),</span> <span class="pre">'answer':</span> <span class="pre">FieldInfo(annotation=AnswerType,</span> <span class="pre">required=True),</span> <span class="pre">'first_sent':</span> <span class="pre">FieldInfo(annotation=datetime,</span> <span class="pre">required=True),</span> <span class="pre">'last_sent':</span> <span class="pre">FieldInfo(annotation=datetime,</span> <span class="pre">required=True),</span> <span class="pre">'recipient':</span> <span class="pre">FieldInfo(annotation=EmailRecipient,</span> <span class="pre">required=True)}</span></em><a class="headerlink" href="#recruit_me.models.data_models.DataframeEntryModel.model_fields" title="Link to this definition"></a></dt>
+<dd><p>Metadata about the fields defined on the model,
+mapping of field names to [<cite>FieldInfo</cite>][pydantic.fields.FieldInfo] objects.</p>
+<p>This replaces <cite>Model.__fields__</cite> from Pydantic V1.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.DataframeEntryModel.recipient">
+<span class="sig-name descname"><span class="pre">recipient</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient" title="recruit_me.models.data_models.EmailRecipient"><span class="pre">EmailRecipient</span></a></em><a class="headerlink" href="#recruit_me.models.data_models.DataframeEntryModel.recipient" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.DataframeEntryModel.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/recruit_me/models/data_models.html#DataframeEntryModel.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#recruit_me.models.data_models.DataframeEntryModel.to_dict" title="Link to this definition"></a></dt>
+<dd><p>Convert the object into a dataframe entry dict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dataframe entry.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.EmailModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">recruit_me.models.data_models.</span></span><span class="sig-name descname"><span class="pre">EmailModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipient</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient" title="recruit_me.models.data_models.EmailRecipient"><span class="pre">EmailRecipient</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Interest</span> <span class="pre">in</span> <span class="pre">Career</span> <span class="pre">Opportunity'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attached_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Path</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/recruit_me/models/data_models.html#EmailModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#recruit_me.models.data_models.EmailModel" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Definition of email object.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.EmailModel.attached_files">
+<span class="sig-name descname"><span class="pre">attached_files</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Path</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#recruit_me.models.data_models.EmailModel.attached_files" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.EmailModel.content">
+<span class="sig-name descname"><span class="pre">content</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#recruit_me.models.data_models.EmailModel.content" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.EmailModel.model_computed_fields">
+<span class="sig-name descname"><span class="pre">model_computed_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ComputedFieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#recruit_me.models.data_models.EmailModel.model_computed_fields" title="Link to this definition"></a></dt>
+<dd><p>A dictionary of computed field names and their corresponding <cite>ComputedFieldInfo</cite> objects.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.EmailModel.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#recruit_me.models.data_models.EmailModel.model_config" title="Link to this definition"></a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.EmailModel.model_fields">
+<span class="sig-name descname"><span class="pre">model_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">FieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'attached_files':</span> <span class="pre">FieldInfo(annotation=list[Path],</span> <span class="pre">required=False,</span> <span class="pre">default=[]),</span> <span class="pre">'content':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=True),</span> <span class="pre">'object':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=False,</span> <span class="pre">default='Interest</span> <span class="pre">in</span> <span class="pre">Career</span> <span class="pre">Opportunity'),</span> <span class="pre">'recipient':</span> <span class="pre">FieldInfo(annotation=EmailRecipient,</span> <span class="pre">required=True)}</span></em><a class="headerlink" href="#recruit_me.models.data_models.EmailModel.model_fields" title="Link to this definition"></a></dt>
+<dd><p>Metadata about the fields defined on the model,
+mapping of field names to [<cite>FieldInfo</cite>][pydantic.fields.FieldInfo] objects.</p>
+<p>This replaces <cite>Model.__fields__</cite> from Pydantic V1.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.EmailModel.object">
+<span class="sig-name descname"><span class="pre">object</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#recruit_me.models.data_models.EmailModel.object" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.EmailModel.recipient">
+<span class="sig-name descname"><span class="pre">recipient</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#recruit_me.models.data_models.EmailRecipient" title="recruit_me.models.data_models.EmailRecipient"><span class="pre">EmailRecipient</span></a></em><a class="headerlink" href="#recruit_me.models.data_models.EmailModel.recipient" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.EmailRecipient">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">recruit_me.models.data_models.</span></span><span class="sig-name descname"><span class="pre">EmailRecipient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">company</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Unknown'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/recruit_me/models/data_models.html#EmailRecipient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#recruit_me.models.data_models.EmailRecipient" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Definition of the Recipient of the email.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.EmailRecipient.company">
+<span class="sig-name descname"><span class="pre">company</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#recruit_me.models.data_models.EmailRecipient.company" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.EmailRecipient.email">
+<span class="sig-name descname"><span class="pre">email</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#recruit_me.models.data_models.EmailRecipient.email" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.EmailRecipient.model_computed_fields">
+<span class="sig-name descname"><span class="pre">model_computed_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ComputedFieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#recruit_me.models.data_models.EmailRecipient.model_computed_fields" title="Link to this definition"></a></dt>
+<dd><p>A dictionary of computed field names and their corresponding <cite>ComputedFieldInfo</cite> objects.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.EmailRecipient.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#recruit_me.models.data_models.EmailRecipient.model_config" title="Link to this definition"></a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.EmailRecipient.model_fields">
+<span class="sig-name descname"><span class="pre">model_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">FieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'company':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=True),</span> <span class="pre">'email':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=True),</span> <span class="pre">'name':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=True),</span> <span class="pre">'position':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=False,</span> <span class="pre">default='Unknown')}</span></em><a class="headerlink" href="#recruit_me.models.data_models.EmailRecipient.model_fields" title="Link to this definition"></a></dt>
+<dd><p>Metadata about the fields defined on the model,
+mapping of field names to [<cite>FieldInfo</cite>][pydantic.fields.FieldInfo] objects.</p>
+<p>This replaces <cite>Model.__fields__</cite> from Pydantic V1.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.EmailRecipient.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#recruit_me.models.data_models.EmailRecipient.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.data_models.EmailRecipient.position">
+<span class="sig-name descname"><span class="pre">position</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#recruit_me.models.data_models.EmailRecipient.position" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-recruit_me.models">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-recruit_me.models" title="Link to this heading"></a></h2>
+<p>Contains models.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Arnaud SOMVILLE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
