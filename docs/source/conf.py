@@ -32,3 +32,9 @@ napoleon_include_special_with_doc = True
 # -- Options for HTML output -------------------------------------------------
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
+html_theme_options = {
+    'page_width': 'auto',
+    'sidebar_width': '220px',
+    'fixed_sidebar': True,
+    'show_related': True,  # Ajoute des liens vers les pages connexes.
+}
