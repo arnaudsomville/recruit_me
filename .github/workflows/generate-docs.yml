@@ -1,4 +1,4 @@
-name: Build and Test with Conda
+name: Build, Test, and Deploy Documentation
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   pull_request: {}
 
 permissions:
-  contents: write  # Nécessaire pour écrire dans le dépôt pour le déploiement
+  contents: write
 
 jobs:
   build-and-test:
@@ -28,9 +28,15 @@ jobs:
           conda create -n ci_env python=3.11 -y
           conda activate ci_env
           pip install --upgrade pip
-          pip install pdm==2.20.1
+          pip install pdm==2.20.1 pre-commit
           pdm config python.use_venv false
           pdm install --dev
+
+      - name: Run pre-commit hooks
+        run: |
+          source ~/.bashrc
+          conda activate ci_env
+          pre-commit run -a
 
       - name: Run tests with coverage
         run: |

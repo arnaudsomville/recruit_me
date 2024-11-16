@@ -1,3 +1,6 @@
+import os
+import sys
+sys.path.insert(0, os.path.abspath('../../src'))
 # Configuration file for the Sphinx documentation builder.
 
 # -- Project information -----------------------------------------------------
@@ -16,11 +19,6 @@ extensions = [
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
-
-# Add the source path
-import os
-import sys
-sys.path.insert(0, os.path.abspath('../../src'))
 
 # Napoleon settings
 napoleon_google_docstring = True
