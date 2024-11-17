@@ -29,7 +29,6 @@ jobs:
           conda activate ci_env
           pip install --upgrade pip
           pip install pdm==2.20.1 pre-commit
-          pdm fix
           pdm config python.use_venv false
           pdm install --dev
 
