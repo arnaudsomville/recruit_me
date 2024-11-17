@@ -50,7 +50,7 @@ jobs:
           echo '```' >> $GITHUB_STEP_SUMMARY
           grep -A 15 "coverage:" coverage_output.txt >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
-          echo $GITHUB_STEP_SUMMARY
+          cat $GITHUB_STEP_SUMMARY
           exit $TEST_EXIT_CODE
 
   build-and-deploy-docs:
