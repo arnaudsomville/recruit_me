@@ -27,7 +27,7 @@ class RecruitMe:
         Returns:
             list: List of templates.
         """
-        return [file.name for file in self.get_template_folder().iterdir() if file.is_file()]
+        return sorted([file.name for file in self.get_template_folder().iterdir() if file.is_file()])
 
     def get_cv_folder(self)->Path:
         """Retrieve the cv path.
@@ -45,4 +45,4 @@ class RecruitMe:
         Returns:
             list: List of cvs.
         """
-        return [file.name for file in self.get_cv_folder().iterdir() if file.is_file()]
+        return sorted([file.name for file in self.get_cv_folder().iterdir() if file.is_file()])
