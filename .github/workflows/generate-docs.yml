@@ -27,9 +27,9 @@ jobs:
           source ~/.bashrc
           conda create -n ci_env python=3.11 -y
           conda activate ci_env
-          pdm fix
           pip install --upgrade pip
           pip install pdm==2.20.1 pre-commit
+          pdm fix
           pdm config python.use_venv false
           pdm install --dev
 
@@ -51,6 +51,7 @@ jobs:
           echo '```' >> $GITHUB_STEP_SUMMARY
           grep -A 15 "coverage:" coverage_output.txt >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
+          echo $GITHUB_STEP_SUMMARY
           exit $TEST_EXIT_CODE
 
   build-and-deploy-docs:
