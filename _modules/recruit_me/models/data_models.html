@@ -77,7 +77,7 @@
 <span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
 
 <div class="viewcode-block" id="EmailRecipient">
-<a class="viewcode-back" href="../../../recruit_me.models.html#recruit_me.models.data_models.EmailRecipient">[docs]</a>
+<a class="viewcode-back" href="../../../recruit_me.models.data_models.html#recruit_me.models.data_models.EmailRecipient">[docs]</a>
 <span class="k">class</span> <span class="nc">EmailRecipient</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Definition of the Recipient of the email.&quot;&quot;&quot;</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
@@ -88,7 +88,7 @@
 
 
 <div class="viewcode-block" id="EmailModel">
-<a class="viewcode-back" href="../../../recruit_me.models.html#recruit_me.models.data_models.EmailModel">[docs]</a>
+<a class="viewcode-back" href="../../../recruit_me.models.data_models.html#recruit_me.models.data_models.EmailModel">[docs]</a>
 <span class="k">class</span> <span class="nc">EmailModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Definition of email object.&quot;&quot;&quot;</span>
     <span class="n">recipient</span><span class="p">:</span> <span class="n">EmailRecipient</span>
@@ -98,7 +98,7 @@
 
 
 <div class="viewcode-block" id="AnswerType">
-<a class="viewcode-back" href="../../../recruit_me.models.html#recruit_me.models.data_models.AnswerType">[docs]</a>
+<a class="viewcode-back" href="../../../recruit_me.models.data_models.html#recruit_me.models.data_models.AnswerType">[docs]</a>
 <span class="k">class</span> <span class="nc">AnswerType</span><span class="p">(</span><span class="n">StrEnum</span><span class="p">):</span>
     <span class="n">WAITING</span> <span class="o">=</span><span class="s1">&#39;WAITING&#39;</span>
     <span class="n">REFUSED</span> <span class="o">=</span> <span class="s1">&#39;REFUSED&#39;</span>
@@ -107,7 +107,7 @@
     
 
 <div class="viewcode-block" id="DataframeEntryModel">
-<a class="viewcode-back" href="../../../recruit_me.models.html#recruit_me.models.data_models.DataframeEntryModel">[docs]</a>
+<a class="viewcode-back" href="../../../recruit_me.models.data_models.html#recruit_me.models.data_models.DataframeEntryModel">[docs]</a>
 <span class="k">class</span> <span class="nc">DataframeEntryModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">first_sent</span><span class="p">:</span> <span class="n">datetime</span>
     <span class="n">last_sent</span><span class="p">:</span> <span class="n">datetime</span>
@@ -116,7 +116,7 @@
     <span class="n">amount_of_email_sent</span><span class="p">:</span> <span class="nb">int</span>
 
 <div class="viewcode-block" id="DataframeEntryModel.to_dict">
-<a class="viewcode-back" href="../../../recruit_me.models.html#recruit_me.models.data_models.DataframeEntryModel.to_dict">[docs]</a>
+<a class="viewcode-back" href="../../../recruit_me.models.data_models.html#recruit_me.models.data_models.DataframeEntryModel.to_dict">[docs]</a>
     <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">dict</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert the object into a dataframe entry dict.</span>
 

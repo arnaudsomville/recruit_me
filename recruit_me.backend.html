@@ -19,8 +19,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="recruit_me.models package" href="recruit_me.models.html" />
-    <link rel="prev" title="recruit_me package" href="recruit_me.html" /> 
+    <link rel="next" title="recruit_me.backend.dataframe_manager module" href="recruit_me.backend.dataframe_manager.html" />
+    <link rel="prev" title="recruit_me.api.main_api module" href="recruit_me.api.main_api.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,6 +47,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="recruit_me.html">recruit_me package</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="recruit_me.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="recruit_me.api.html">recruit_me.api package</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">recruit_me.backend package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="recruit_me.models.html">recruit_me.models package</a></li>
 </ul>
@@ -88,120 +89,35 @@
 <h1>recruit_me.backend package<a class="headerlink" href="#recruit-me-backend-package" title="Link to this heading"></a></h1>
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
-</section>
-<section id="module-recruit_me.backend.dataframe_manager">
-<span id="recruit-me-backend-dataframe-manager-module"></span><h2>recruit_me.backend.dataframe_manager module<a class="headerlink" href="#module-recruit_me.backend.dataframe_manager" title="Link to this heading"></a></h2>
-<p>File managing the dataframe that keeps in memory the email sent.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="recruit_me.backend.dataframe_manager.add_entry_to_dataframe">
-<span class="sig-prename descclassname"><span class="pre">recruit_me.backend.dataframe_manager.</span></span><span class="sig-name descname"><span class="pre">add_entry_to_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="recruit_me.models.html#recruit_me.models.data_models.DataframeEntryModel" title="recruit_me.models.data_models.DataframeEntryModel"><span class="pre">DataframeEntryModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/recruit_me/backend/dataframe_manager.html#add_entry_to_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#recruit_me.backend.dataframe_manager.add_entry_to_dataframe" title="Link to this definition"></a></dt>
-<dd><p>Add an entry to the Dataframe managing the sent emails. If the entry already exist, it will increment the amount of email sent.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>data</strong> (<a class="reference internal" href="recruit_me.models.html#recruit_me.models.data_models.DataframeEntryModel" title="recruit_me.models.data_models.DataframeEntryModel"><em>DataframeEntryModel</em></a>) – data to add.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Updated dataframe.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="recruit_me.backend.dataframe_manager.retrieve_dataframe">
-<span class="sig-prename descclassname"><span class="pre">recruit_me.backend.dataframe_manager.</span></span><span class="sig-name descname"><span class="pre">retrieve_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/recruit_me/backend/dataframe_manager.html#retrieve_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#recruit_me.backend.dataframe_manager.retrieve_dataframe" title="Link to this definition"></a></dt>
-<dd><p>Retrieve the dataframe from file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Retrieved Dataframe.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>pd.DataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="recruit_me.backend.dataframe_manager.save_dataframe">
-<span class="sig-prename descclassname"><span class="pre">recruit_me.backend.dataframe_manager.</span></span><span class="sig-name descname"><span class="pre">save_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/recruit_me/backend/dataframe_manager.html#save_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#recruit_me.backend.dataframe_manager.save_dataframe" title="Link to this definition"></a></dt>
-<dd><p>Save the dataframe in the home folder.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>dataframe</strong> (<em>pd.DataFrame</em>) – Dataframe that keeps in memory the email sent.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>True if everything went well.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
-<section id="module-recruit_me.backend.email_sender">
-<span id="recruit-me-backend-email-sender-module"></span><h2>recruit_me.backend.email_sender module<a class="headerlink" href="#module-recruit_me.backend.email_sender" title="Link to this heading"></a></h2>
-<p>Contains functions for email sending.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="recruit_me.backend.email_sender.send_email">
-<span class="sig-prename descclassname"><span class="pre">recruit_me.backend.email_sender.</span></span><span class="sig-name descname"><span class="pre">send_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="recruit_me.models.html#recruit_me.models.data_models.EmailModel" title="recruit_me.models.data_models.EmailModel"><span class="pre">EmailModel</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/recruit_me/backend/email_sender.html#send_email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#recruit_me.backend.email_sender.send_email" title="Link to this definition"></a></dt>
-<dd><p>Function used to send an email</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>email_data</strong> (<a class="reference internal" href="recruit_me.models.html#recruit_me.models.data_models.EmailModel" title="recruit_me.models.data_models.EmailModel"><em>EmailModel</em></a>) – Email data containing content and attachment.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>True if the email was sent successfully, False otherwise.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
-<section id="module-recruit_me.backend.template_filler">
-<span id="recruit-me-backend-template-filler-module"></span><h2>recruit_me.backend.template_filler module<a class="headerlink" href="#module-recruit_me.backend.template_filler" title="Link to this heading"></a></h2>
-<p>File used to fill gaps in the templates provided by the user.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="recruit_me.backend.template_filler.fill_gaps_in_template">
-<span class="sig-prename descclassname"><span class="pre">recruit_me.backend.template_filler.</span></span><span class="sig-name descname"><span class="pre">fill_gaps_in_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email_recipient_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="recruit_me.models.html#recruit_me.models.data_models.EmailRecipient" title="recruit_me.models.data_models.EmailRecipient"><span class="pre">EmailRecipient</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Path</span></span></span><a class="reference internal" href="_modules/recruit_me/backend/template_filler.html#fill_gaps_in_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#recruit_me.backend.template_filler.fill_gaps_in_template" title="Link to this definition"></a></dt>
-<dd><p>Fill the gaps</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>template</strong> (<em>Path</em>) – Path of the template used.</p></li>
-<li><p><strong>email_recipient_data</strong> (<em>Path</em>) – Data of the recipient of the email.</p></li>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="recruit_me.backend.dataframe_manager.html">recruit_me.backend.dataframe_manager module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recruit_me.backend.dataframe_manager.html#recruit_me.backend.dataframe_manager.add_entry_to_dataframe"><code class="docutils literal notranslate"><span class="pre">add_entry_to_dataframe()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="recruit_me.backend.dataframe_manager.html#recruit_me.backend.dataframe_manager.retrieve_dataframe"><code class="docutils literal notranslate"><span class="pre">retrieve_dataframe()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="recruit_me.backend.dataframe_manager.html#recruit_me.backend.dataframe_manager.save_dataframe"><code class="docutils literal notranslate"><span class="pre">save_dataframe()</span></code></a></li>
 </ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Path to a file containing the text of the template filled with correct data.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Path</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="recruit_me.backend.template_filler.get_meta_data">
-<span class="sig-prename descclassname"><span class="pre">recruit_me.backend.template_filler.</span></span><span class="sig-name descname"><span class="pre">get_meta_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email_recipient_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="recruit_me.models.html#recruit_me.models.data_models.EmailRecipient" title="recruit_me.models.data_models.EmailRecipient"><span class="pre">EmailRecipient</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/recruit_me/backend/template_filler.html#get_meta_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#recruit_me.backend.template_filler.get_meta_data" title="Link to this definition"></a></dt>
-<dd><p>Retrieve Metadata to be used by jinja2.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>email_recipient_data</strong> (<em>Path</em>) – Data of the recipient of the email.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Meta data for jinja2.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict[str, str]</p>
-</dd>
-</dl>
-</dd></dl>
-
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recruit_me.backend.email_sender.html">recruit_me.backend.email_sender module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recruit_me.backend.email_sender.html#recruit_me.backend.email_sender.send_email"><code class="docutils literal notranslate"><span class="pre">send_email()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recruit_me.backend.recruit_me_core.html">recruit_me.backend.recruit_me_core module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recruit_me.backend.recruit_me_core.html#recruit_me.backend.recruit_me_core.RecruitMe"><code class="docutils literal notranslate"><span class="pre">RecruitMe</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="recruit_me.backend.recruit_me_core.html#recruit_me.backend.recruit_me_core.RecruitMe.get_cv_folder"><code class="docutils literal notranslate"><span class="pre">RecruitMe.get_cv_folder()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="recruit_me.backend.recruit_me_core.html#recruit_me.backend.recruit_me_core.RecruitMe.get_cv_list"><code class="docutils literal notranslate"><span class="pre">RecruitMe.get_cv_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="recruit_me.backend.recruit_me_core.html#recruit_me.backend.recruit_me_core.RecruitMe.get_template_folder"><code class="docutils literal notranslate"><span class="pre">RecruitMe.get_template_folder()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="recruit_me.backend.recruit_me_core.html#recruit_me.backend.recruit_me_core.RecruitMe.get_template_list"><code class="docutils literal notranslate"><span class="pre">RecruitMe.get_template_list()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recruit_me.backend.template_filler.html">recruit_me.backend.template_filler module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recruit_me.backend.template_filler.html#recruit_me.backend.template_filler.fill_gaps_in_template"><code class="docutils literal notranslate"><span class="pre">fill_gaps_in_template()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="recruit_me.backend.template_filler.html#recruit_me.backend.template_filler.get_meta_data"><code class="docutils literal notranslate"><span class="pre">get_meta_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
 </section>
 <section id="module-recruit_me.backend">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-recruit_me.backend" title="Link to this heading"></a></h2>
@@ -213,8 +129,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="recruit_me.html" class="btn btn-neutral float-left" title="recruit_me package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="recruit_me.models.html" class="btn btn-neutral float-right" title="recruit_me.models package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="recruit_me.api.main_api.html" class="btn btn-neutral float-left" title="recruit_me.api.main_api module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="recruit_me.backend.dataframe_manager.html" class="btn btn-neutral float-right" title="recruit_me.backend.dataframe_manager module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

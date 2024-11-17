@@ -7,6 +7,7 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
+   recruit_me.api
    recruit_me.backend
    recruit_me.models
 
