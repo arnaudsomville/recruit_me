@@ -27,6 +27,7 @@ jobs:
           source ~/.bashrc
           conda create -n ci_env python=3.11 -y
           conda activate ci_env
+          pdm fix
           pip install --upgrade pip
           pip install pdm==2.20.1 pre-commit
           pdm config python.use_venv false
@@ -42,7 +43,6 @@ jobs:
         run: |
           source ~/.bashrc
           conda activate ci_env
-          pdm fix
           set +e
           pdm run pytest --cov=src --cov-report=term --cov-report=json --cov-report=html --cov-fail-under=85 > coverage_output.txt
           TEST_EXIT_CODE=$?
