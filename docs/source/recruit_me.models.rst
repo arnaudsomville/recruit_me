@@ -4,13 +4,10 @@ recruit\_me.models package
 Submodules
 ----------
 
-recruit\_me.models.data\_models module
---------------------------------------
+.. toctree::
+   :maxdepth: 4
 
-.. automodule:: recruit_me.models.data_models
-   :members:
-   :undoc-members:
-   :show-inheritance:
+   recruit_me.models.data_models
 
 Module contents
 ---------------

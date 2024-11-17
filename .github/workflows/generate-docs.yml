@@ -81,7 +81,7 @@ jobs:
         run: |
           source ~/.bashrc
           conda activate ci_env
-          sphinx-apidoc -o docs/ src/ --force --separate
+          sphinx-apidoc -o docs/source src/ --force --separate
           cd docs
           pdm run make clean
           pdm run make html
