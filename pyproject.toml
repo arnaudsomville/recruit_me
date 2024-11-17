@@ -47,3 +47,8 @@ doc = [
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
+
+[tool.pdm.lock]
+targets = [
+    { os = "any", python = ">=3.11", platform = "any" }
+]
