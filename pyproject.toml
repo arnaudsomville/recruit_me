@@ -13,8 +13,7 @@ version = "0.0.1"
 dependencies = [
     "confz>=2.0.1",
     "pydantic>=2.6.4",
-    "fastapi>=0.110.1",
-    "uvicorn>=0.29.0",
+    "fastapi[standard]>=0.112.2",
     "pandas>=2.2.3",
 ]
 readme = "README.md"
