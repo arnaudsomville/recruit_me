@@ -1,12 +1,10 @@
 """Define the api endpoints."""
 
-from pathlib import Path
 import shutil
 from fastapi import FastAPI, File, UploadFile
 import uvicorn
 
 from recruit_me.backend.recruit_me_core import RecruitMe
-from recruit_me.utils.configuration import MainConfig
 
 app = FastAPI(
     title="Recruit_me",

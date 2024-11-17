@@ -1,6 +1,5 @@
 """Test the recruit_me_core methods."""
 
-import pytest
 from pathlib import Path
 from recruit_me.backend.recruit_me_core import RecruitMe
 from recruit_me.utils.configuration import MainConfig
