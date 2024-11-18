@@ -15,7 +15,7 @@ from recruit_me.utils.home_folder_management import verify_home_folder
 
 def create_dummy_csv() -> None:
     """Create a dummy CSV file with email data."""
-    dataframe_save_file = Path.home().joinpath(f'{MainConfig().home_folder}/saved_sent_email_data.csv')
+    dataframe_save_file = Path.home().joinpath(f'{MainConfig().home_folder}/{MainConfig().csv_file}')
     data = [
         ["first_sent", "last_sent", "recipient_company", "recipient_name", "recipient_position", "recipient_email", "amount_of_email_sent"],
         ["2023-01-01T10:00:00", "2023-01-02T15:30:00", "Duff Brewery", "Homer Simpson", "Nuclear Safety Inspector", "homer@duffbrewery.com", 3],

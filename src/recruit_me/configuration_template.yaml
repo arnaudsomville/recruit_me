@@ -5,3 +5,4 @@ user:
   smtp_server: smtp.office365.com
   smtp_port: 587
 home_folder: .recruit_me
+csv_file: saved_sent_email_data.csv

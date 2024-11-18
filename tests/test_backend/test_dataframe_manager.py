@@ -21,7 +21,7 @@ def test_retrieve_dataframe_nominal() -> None:
 
 def test_retrieve_dataframe_no_file()->None:
     """Test that the dataframe retrieval if the file does not exist (before each test a dummy dataframe is created)."""
-    dataframe_save_file = Path.home().joinpath(f'{MainConfig().home_folder}/saved_sent_email_data.csv')
+    dataframe_save_file = Path.home().joinpath(f'{MainConfig().home_folder}/{MainConfig().csv_file}')
     os.remove(dataframe_save_file)
     retrieved_df = retrieve_dataframe()
     print(retrieved_df)
@@ -30,7 +30,7 @@ def test_retrieve_dataframe_no_file()->None:
 
 def test_retrieve_dataframe_wrong_column()->None:
     """Test that the dataframe retrieval if the file does not exist (before each test a dummy dataframe is created)."""
-    dataframe_save_file = Path.home().joinpath(f'{MainConfig().home_folder}/saved_sent_email_data.csv')
+    dataframe_save_file = Path.home().joinpath(f'{MainConfig().home_folder}/{MainConfig().csv_file}')
     data = [
         ["first_sent", "last_sent", "recipient_company_Incorrect_name", "recipient_name", "recipient_position", "recipient_email", "amount_of_email_sent"],
         ["2023-01-01T10:00:00", "2023-01-02T15:30:00", "Duff Brewery", "Homer Simpson", "Nuclear Safety Inspector", "homer@duffbrewery.com", 3],
@@ -122,7 +122,7 @@ def test_save_dataframe_not_nominal()->None:
 
 def test_save_dataframe_nominal()->None:
     """Test the saving of Dataframe."""
-    dataframe_save_file = Path.home().joinpath(f'{MainConfig().home_folder}/saved_sent_email_data.csv')
+    dataframe_save_file = Path.home().joinpath(f'{MainConfig().home_folder}/{MainConfig().csv_file}')
     os.remove(dataframe_save_file)
 
     dataframe_entries = [

@@ -8,7 +8,7 @@ from jinja2 import Environment, FileSystemLoader
 from recruit_me.models.data_models import EmailRecipient
 from recruit_me.utils.configuration import MainConfig
 
-def fill_gaps_in_template(template_path: Path, email_recipient_data: EmailRecipient)->Path:
+def fill_gaps_in_template(template_path: Path, email_recipient_data: EmailRecipient, output_file_name: str | None = None)->Path:
     """Fill the gaps 
 
     Args:
@@ -18,13 +18,15 @@ def fill_gaps_in_template(template_path: Path, email_recipient_data: EmailRecipi
     Returns:
         Path: Path to a file containing the text of the template filled with correct data.
     """
+    extension = template_path.suffix[1:]
+    if output_file_name is None:
+        output_file_name = template_path.name.replace(f'.{extension}', '')
     env = Environment(loader=FileSystemLoader(template_path.parent), autoescape=True)
     template = env.get_template(str(template_path.name))
-    extension = template_path.suffix[1:]
     output = template.render(get_meta_data(email_recipient_data))
-    output_folder = Path.home().joinpath(f'{MainConfig().home_folder}/outputs/templates/{str(template_path.name)}')
+    output_folder = Path.home().joinpath(f"{MainConfig().home_folder}/outputs/templates/{str(template_path.name.replace(f'.{extension}', ''))}/{str(uuid.uuid4())}")
     output_folder.mkdir(parents=True, exist_ok=True)
-    output_file = output_folder.joinpath(f'{str(uuid.uuid4())}.{extension}')
+    output_file = output_folder.joinpath(f'{str(output_file_name)}.{extension}')
     with open(output_file, 'w') as file:
         file.write(output)
     return output_file

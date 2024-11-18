@@ -41,7 +41,7 @@ def retrieve_dataframe() -> pd.DataFrame:
         answer=AnswerType.WAITING,
         amount_of_email_sent=0
     ).to_dict().keys()
-    dataframe_save_file = Path.home().joinpath(f'{MainConfig().home_folder}/saved_sent_email_data.csv')
+    dataframe_save_file = Path.home().joinpath(f'{MainConfig().home_folder}/{MainConfig().csv_file}')
     if dataframe_save_file.exists():
         dataframe = pd.read_csv(dataframe_save_file)
         if set(dataframe.columns) == set(expected_columns):
@@ -67,7 +67,7 @@ def save_dataframe(dataframe: pd.DataFrame) -> bool:
         bool: True if everything went well.
     """
     try:
-        dataframe_save_file = Path.home().joinpath(f'{MainConfig().home_folder}/saved_sent_email_data.csv')
+        dataframe_save_file = Path.home().joinpath(f'{MainConfig().home_folder}/{MainConfig().csv_file}')
         dataframe.to_csv(dataframe_save_file, index=False)
         return True
     except Exception as e:

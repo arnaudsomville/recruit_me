@@ -1,10 +1,14 @@
 """Define the api endpoints."""
 
+from pathlib import Path
 import shutil
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi.responses import FileResponse
 import uvicorn
 
 from recruit_me.backend.recruit_me_core import RecruitMe
+from recruit_me.models.endpoint_models import EmailSendingEndpointModel
+from recruit_me.utils.configuration import MainConfig
 
 app = FastAPI(
     title="Recruit_me",
@@ -146,6 +150,49 @@ def get_template_list()->dict:
         'status_code': STATUS_SUCCESS,
         'description': ' '.join(map(str, cv_list))
     }
+
+@app.post('/send_email')
+def send_email(email_data: EmailSendingEndpointModel)->dict:
+    """Endpoint used to send emails.
+
+    Args:
+        email_data (EmailSendingEndpointModel): _description_
+
+    Returns:
+        dict: _description_
+    """
+    RecruitMe().send_email(
+        email_recipient=email_data.email_recipient,
+        email_object= email_data.email_object,
+        cv_filename=email_data.cv_filename,
+        cover_letter_template_filename=email_data.cover_letter_template_filename,
+        email_template_filename=email_data.email_template_filename
+    )
+    return {
+        'status_code': STATUS_SUCCESS,
+        'description': f'Email successfully sent to {email_data.email_recipient.email}'
+    }
+
+@app.get("/download_summary", response_class=FileResponse, response_model=None)
+def download_summary() -> FileResponse:
+    """Endpoint to download the summary file.
+
+    Returns:
+        FileResponse: The requested file if it exists.
+    """
+    file_path = Path.home().joinpath(f'{MainConfig().home_folder}/{MainConfig().csv_file}')
+
+    if not file_path.exists():
+        return {
+            'status_code': STATUS_SUCCESS,
+            'description': 'The CSV is empty, send emails first.'
+        }
+
+    return FileResponse(
+        path=file_path,
+        media_type="application/octet-stream",
+        filename=MainConfig().csv_file
+    )
 
 if __name__ == '__main__': #pragma: no cover
     uvicorn.run("main_api:app", host="0.0.0.0", port=8100, reload=True)

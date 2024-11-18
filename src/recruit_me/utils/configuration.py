@@ -42,6 +42,7 @@ class MainConfig(BaseConfig, metaclass=BaseConfigMetaclass):
 
     user: EmailConf
     home_folder: str
+    csv_file: str
 
     CONFIG_SOURCES: ClassVar[list[ConfigSource]] = [
         FileSource(file=get_config_file_path()),
