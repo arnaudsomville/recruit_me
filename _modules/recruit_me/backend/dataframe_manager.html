@@ -77,14 +77,21 @@
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="kn">from</span> <span class="nn">recruit_me.models.data_models</span> <span class="kn">import</span> <span class="n">AnswerType</span><span class="p">,</span> <span class="n">DataframeEntryModel</span><span class="p">,</span> <span class="n">EmailRecipient</span>
+<span class="kn">from</span> <span class="nn">recruit_me.models.data_models</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AnswerType</span><span class="p">,</span>
+    <span class="n">DataframeEntryModel</span><span class="p">,</span>
+    <span class="n">EmailRecipient</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span> <span class="nn">recruit_me.utils.configuration</span> <span class="kn">import</span> <span class="n">MainConfig</span>
 
-<span class="c1">#TODO : Transform into a DataframeManager class that automatically call retrieve_dataframe at init.</span>
+<span class="c1"># TODO : Transform into a DataframeManager class that automatically call retrieve_dataframe at init.</span>
+
 
 <div class="viewcode-block" id="add_entry_to_dataframe">
 <a class="viewcode-back" href="../../../recruit_me.backend.dataframe_manager.html#recruit_me.backend.dataframe_manager.add_entry_to_dataframe">[docs]</a>
-<span class="k">def</span> <span class="nf">add_entry_to_dataframe</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">DataframeEntryModel</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">add_entry_to_dataframe</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">DataframeEntryModel</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Add an entry to the Dataframe managing the sent emails. If the entry already exist, it will increment the amount of email sent.</span>
 
 <span class="sd">    Args:</span>
@@ -95,12 +102,17 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">recipient</span><span class="o">.</span><span class="n">email</span> <span class="ow">in</span> <span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;recipient_email&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
-        <span class="n">dataframe</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;recipient_email&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">data</span><span class="o">.</span><span class="n">recipient</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="s2">&quot;last_sent&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">last_sent</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
-        <span class="n">dataframe</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;recipient_email&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">data</span><span class="o">.</span><span class="n">recipient</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="s2">&quot;amount_of_email_sent&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">dataframe</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+            <span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;recipient_email&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">data</span><span class="o">.</span><span class="n">recipient</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="s2">&quot;last_sent&quot;</span>
+        <span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">last_sent</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+        <span class="n">dataframe</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+            <span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;recipient_email&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">data</span><span class="o">.</span><span class="n">recipient</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="s2">&quot;amount_of_email_sent&quot;</span>
+        <span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">new_row</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">data</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()])</span>
         <span class="n">dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">new_row</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">dataframe</span></div>
+
 
 
 <div class="viewcode-block" id="retrieve_dataframe">
@@ -111,14 +123,22 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        pd.DataFrame: Retrieved Dataframe.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">expected_columns</span> <span class="o">=</span> <span class="n">DataframeEntryModel</span><span class="p">(</span>
-        <span class="n">first_sent</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
-        <span class="n">last_sent</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
-        <span class="n">recipient</span><span class="o">=</span><span class="n">EmailRecipient</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Test&quot;</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span> <span class="n">company</span><span class="o">=</span><span class="s2">&quot;TestCompany&quot;</span><span class="p">),</span>
-        <span class="n">answer</span><span class="o">=</span><span class="n">AnswerType</span><span class="o">.</span><span class="n">WAITING</span><span class="p">,</span>
-        <span class="n">amount_of_email_sent</span><span class="o">=</span><span class="mi">0</span>
-    <span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-    <span class="n">dataframe_save_file</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">MainConfig</span><span class="p">()</span><span class="o">.</span><span class="n">home_folder</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">MainConfig</span><span class="p">()</span><span class="o">.</span><span class="n">csv_file</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">expected_columns</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">DataframeEntryModel</span><span class="p">(</span>
+            <span class="n">first_sent</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
+            <span class="n">last_sent</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
+            <span class="n">recipient</span><span class="o">=</span><span class="n">EmailRecipient</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Test&quot;</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span> <span class="n">company</span><span class="o">=</span><span class="s2">&quot;TestCompany&quot;</span>
+            <span class="p">),</span>
+            <span class="n">answer</span><span class="o">=</span><span class="n">AnswerType</span><span class="o">.</span><span class="n">WAITING</span><span class="p">,</span>
+            <span class="n">amount_of_email_sent</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="n">dataframe_save_file</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">MainConfig</span><span class="p">()</span><span class="o">.</span><span class="n">home_folder</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">MainConfig</span><span class="p">()</span><span class="o">.</span><span class="n">csv_file</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
     <span class="k">if</span> <span class="n">dataframe_save_file</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
         <span class="n">dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">dataframe_save_file</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">dataframe</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">expected_columns</span><span class="p">):</span>
@@ -128,11 +148,11 @@
             <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">dataframe_save_file</span><span class="p">))</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Corrupted Dataframe save. Removing file.&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">expected_columns</span><span class="p">)</span>
-        
-    
+
     <span class="k">else</span><span class="p">:</span>
-        <span class="c1">#Dynamic retrieval of DataframeEntryModel columns to avoid useless future modifications.</span>
+        <span class="c1"># Dynamic retrieval of DataframeEntryModel columns to avoid useless future modifications.</span>
         <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">expected_columns</span><span class="p">)</span></div>
+
 
 
 <div class="viewcode-block" id="save_dataframe">
@@ -147,7 +167,9 @@
 <span class="sd">        bool: True if everything went well.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">dataframe_save_file</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">MainConfig</span><span class="p">()</span><span class="o">.</span><span class="n">home_folder</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">MainConfig</span><span class="p">()</span><span class="o">.</span><span class="n">csv_file</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">dataframe_save_file</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">MainConfig</span><span class="p">()</span><span class="o">.</span><span class="n">home_folder</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">MainConfig</span><span class="p">()</span><span class="o">.</span><span class="n">csv_file</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
         <span class="n">dataframe</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">dataframe_save_file</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">True</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
@@ -155,9 +177,12 @@
         <span class="k">return</span> <span class="kc">False</span></div>
 
 
+
 <div class="viewcode-block" id="update_response_status">
 <a class="viewcode-back" href="../../../recruit_me.backend.dataframe_manager.html#recruit_me.backend.dataframe_manager.update_response_status">[docs]</a>
-<span class="k">def</span> <span class="nf">update_response_status</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="n">AnswerType</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">update_response_status</span><span class="p">(</span>
+    <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="n">AnswerType</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Update the status of an answer</span>
 
 <span class="sd">    Args:</span>
@@ -166,11 +191,12 @@
 <span class="sd">        dataframe (pd.DataFrame): Dataframe.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        pd.DataFrame: updated dataframe. </span>
+<span class="sd">        pd.DataFrame: updated dataframe.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">email</span> <span class="ow">in</span> <span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;recipient_email&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
         <span class="n">dataframe</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;recipient_email&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">email</span><span class="p">,</span> <span class="s2">&quot;answer&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">status</span>
     <span class="k">return</span> <span class="n">dataframe</span></div>
+
 
 
 <div class="viewcode-block" id="dataframe_to_list">
@@ -191,7 +217,7 @@
             <span class="n">name</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;recipient_name&quot;</span><span class="p">],</span>
             <span class="n">email</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;recipient_email&quot;</span><span class="p">],</span>
             <span class="n">company</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;recipient_company&quot;</span><span class="p">],</span>
-            <span class="n">position</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;recipient_position&quot;</span><span class="p">]</span>
+            <span class="n">position</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;recipient_position&quot;</span><span class="p">],</span>
         <span class="p">)</span>
 
         <span class="c1"># Reconstruire l&#39;objet DataframeEntryModel</span>
@@ -200,14 +226,15 @@
             <span class="n">last_sent</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;last_sent&quot;</span><span class="p">]),</span>
             <span class="n">recipient</span><span class="o">=</span><span class="n">recipient</span><span class="p">,</span>
             <span class="n">answer</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;answer&quot;</span><span class="p">],</span>
-            <span class="n">amount_of_email_sent</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;amount_of_email_sent&quot;</span><span class="p">]</span>
+            <span class="n">amount_of_email_sent</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;amount_of_email_sent&quot;</span><span class="p">],</span>
         <span class="p">)</span>
         <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">result</span></div>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span> <span class="c1">#pragma: no-cover</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>  <span class="c1"># pragma: no-cover</span>
     <span class="n">dataframe_entries</span> <span class="o">=</span> <span class="p">[</span>
         <span class="n">DataframeEntryModel</span><span class="p">(</span>
             <span class="n">first_sent</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
@@ -216,10 +243,10 @@
                 <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Homer Simpson&quot;</span><span class="p">,</span>
                 <span class="n">email</span><span class="o">=</span><span class="s2">&quot;homer@duffbrewery.com&quot;</span><span class="p">,</span>
                 <span class="n">company</span><span class="o">=</span><span class="s2">&quot;Duff Brewery&quot;</span><span class="p">,</span>
-                <span class="n">position</span><span class="o">=</span><span class="s2">&quot;Nuclear Safety Inspector&quot;</span>
+                <span class="n">position</span><span class="o">=</span><span class="s2">&quot;Nuclear Safety Inspector&quot;</span><span class="p">,</span>
             <span class="p">),</span>
             <span class="n">answer</span><span class="o">=</span><span class="n">AnswerType</span><span class="o">.</span><span class="n">WAITING</span><span class="p">,</span>
-            <span class="n">amount_of_email_sent</span><span class="o">=</span><span class="mi">3</span>
+            <span class="n">amount_of_email_sent</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">DataframeEntryModel</span><span class="p">(</span>
             <span class="n">first_sent</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
@@ -228,10 +255,10 @@
                 <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Tony Stark&quot;</span><span class="p">,</span>
                 <span class="n">email</span><span class="o">=</span><span class="s2">&quot;ironman@starkindustries.com&quot;</span><span class="p">,</span>
                 <span class="n">company</span><span class="o">=</span><span class="s2">&quot;Stark Industries&quot;</span><span class="p">,</span>
-                <span class="n">position</span><span class="o">=</span><span class="s2">&quot;CEO&quot;</span>
+                <span class="n">position</span><span class="o">=</span><span class="s2">&quot;CEO&quot;</span><span class="p">,</span>
             <span class="p">),</span>
             <span class="n">answer</span><span class="o">=</span><span class="n">AnswerType</span><span class="o">.</span><span class="n">ACCEPTED</span><span class="p">,</span>
-            <span class="n">amount_of_email_sent</span><span class="o">=</span><span class="mi">2</span>
+            <span class="n">amount_of_email_sent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">DataframeEntryModel</span><span class="p">(</span>
             <span class="n">first_sent</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
@@ -240,10 +267,10 @@
                 <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Rick Sanchez&quot;</span><span class="p">,</span>
                 <span class="n">email</span><span class="o">=</span><span class="s2">&quot;rick@interdimensionalmail.com&quot;</span><span class="p">,</span>
                 <span class="n">company</span><span class="o">=</span><span class="s2">&quot;Interdimensional Inc.&quot;</span><span class="p">,</span>
-                <span class="n">position</span><span class="o">=</span><span class="s2">&quot;Mad Scientist&quot;</span>
+                <span class="n">position</span><span class="o">=</span><span class="s2">&quot;Mad Scientist&quot;</span><span class="p">,</span>
             <span class="p">),</span>
             <span class="n">answer</span><span class="o">=</span><span class="n">AnswerType</span><span class="o">.</span><span class="n">REFUSED</span><span class="p">,</span>
-            <span class="n">amount_of_email_sent</span><span class="o">=</span><span class="mi">4</span>
+            <span class="n">amount_of_email_sent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">DataframeEntryModel</span><span class="p">(</span>
             <span class="n">first_sent</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
@@ -252,10 +279,10 @@
                 <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Sherlock Holmes&quot;</span><span class="p">,</span>
                 <span class="n">email</span><span class="o">=</span><span class="s2">&quot;sherlock@bakerstreet.com&quot;</span><span class="p">,</span>
                 <span class="n">company</span><span class="o">=</span><span class="s2">&quot;Baker Street Detective Agency&quot;</span><span class="p">,</span>
-                <span class="n">position</span><span class="o">=</span><span class="s2">&quot;Consulting Detective&quot;</span>
+                <span class="n">position</span><span class="o">=</span><span class="s2">&quot;Consulting Detective&quot;</span><span class="p">,</span>
             <span class="p">),</span>
             <span class="n">answer</span><span class="o">=</span><span class="n">AnswerType</span><span class="o">.</span><span class="n">WAITING</span><span class="p">,</span>
-            <span class="n">amount_of_email_sent</span><span class="o">=</span><span class="mi">1</span>
+            <span class="n">amount_of_email_sent</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">DataframeEntryModel</span><span class="p">(</span>
             <span class="n">first_sent</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
@@ -264,11 +291,11 @@
                 <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Darth Vader&quot;</span><span class="p">,</span>
                 <span class="n">email</span><span class="o">=</span><span class="s2">&quot;darth@empire.com&quot;</span><span class="p">,</span>
                 <span class="n">company</span><span class="o">=</span><span class="s2">&quot;Galactic Empire&quot;</span><span class="p">,</span>
-                <span class="n">position</span><span class="o">=</span><span class="s2">&quot;Sith Lord&quot;</span>
+                <span class="n">position</span><span class="o">=</span><span class="s2">&quot;Sith Lord&quot;</span><span class="p">,</span>
             <span class="p">),</span>
             <span class="n">answer</span><span class="o">=</span><span class="n">AnswerType</span><span class="o">.</span><span class="n">REFUSED</span><span class="p">,</span>
-            <span class="n">amount_of_email_sent</span><span class="o">=</span><span class="mi">5</span>
-        <span class="p">)</span>
+            <span class="n">amount_of_email_sent</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="p">),</span>
     <span class="p">]</span>
     <span class="n">dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">dataframe_entries</span><span class="p">])</span>
     <span class="k">assert</span> <span class="n">save_dataframe</span><span class="p">(</span><span class="n">dataframe</span><span class="p">)</span>
@@ -280,10 +307,10 @@
             <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Mickey Mouse&quot;</span><span class="p">,</span>
             <span class="n">email</span><span class="o">=</span><span class="s2">&quot;mickey@disney.com&quot;</span><span class="p">,</span>
             <span class="n">company</span><span class="o">=</span><span class="s2">&quot;Disney Inc&quot;</span><span class="p">,</span>
-            <span class="n">position</span><span class="o">=</span><span class="s2">&quot;CEO&quot;</span>
+            <span class="n">position</span><span class="o">=</span><span class="s2">&quot;CEO&quot;</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">answer</span><span class="o">=</span><span class="n">AnswerType</span><span class="o">.</span><span class="n">ACCEPTED</span><span class="p">,</span>
-        <span class="n">amount_of_email_sent</span><span class="o">=</span><span class="mi">50</span>
+        <span class="n">amount_of_email_sent</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">dataframe</span> <span class="o">=</span> <span class="n">retrieve_dataframe</span><span class="p">()</span>
     <span class="n">dataframe</span> <span class="o">=</span> <span class="n">add_entry_to_dataframe</span><span class="p">(</span><span class="n">additional_data</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">)</span>

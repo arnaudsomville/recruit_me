@@ -74,10 +74,21 @@
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
-<span class="kn">from</span> <span class="nn">recruit_me.backend.dataframe_manager</span> <span class="kn">import</span> <span class="n">add_entry_to_dataframe</span><span class="p">,</span> <span class="n">dataframe_to_list</span><span class="p">,</span> <span class="n">retrieve_dataframe</span><span class="p">,</span> <span class="n">save_dataframe</span><span class="p">,</span> <span class="n">update_response_status</span>
+<span class="kn">from</span> <span class="nn">recruit_me.backend.dataframe_manager</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">add_entry_to_dataframe</span><span class="p">,</span>
+    <span class="n">dataframe_to_list</span><span class="p">,</span>
+    <span class="n">retrieve_dataframe</span><span class="p">,</span>
+    <span class="n">save_dataframe</span><span class="p">,</span>
+    <span class="n">update_response_status</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span> <span class="nn">recruit_me.backend.email_sender</span> <span class="kn">import</span> <span class="n">send_email</span>
 <span class="kn">from</span> <span class="nn">recruit_me.backend.template_filler</span> <span class="kn">import</span> <span class="n">fill_gaps_in_template</span>
-<span class="kn">from</span> <span class="nn">recruit_me.models.data_models</span> <span class="kn">import</span> <span class="n">AnswerType</span><span class="p">,</span> <span class="n">DataframeEntryModel</span><span class="p">,</span> <span class="n">EmailModel</span><span class="p">,</span> <span class="n">EmailRecipient</span>
+<span class="kn">from</span> <span class="nn">recruit_me.models.data_models</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AnswerType</span><span class="p">,</span>
+    <span class="n">DataframeEntryModel</span><span class="p">,</span>
+    <span class="n">EmailModel</span><span class="p">,</span>
+    <span class="n">EmailRecipient</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span> <span class="nn">recruit_me.utils.configuration</span> <span class="kn">import</span> <span class="n">MainConfig</span>
 <span class="kn">from</span> <span class="nn">recruit_me.utils.home_folder_management</span> <span class="kn">import</span> <span class="n">verify_home_folder</span>
 
@@ -93,61 +104,70 @@
 
 <div class="viewcode-block" id="RecruitMe.get_template_folder">
 <a class="viewcode-back" href="../../../recruit_me.backend.recruit_me_core.html#recruit_me.backend.recruit_me_core.RecruitMe.get_template_folder">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_template_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Path</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get_template_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve the Template path.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Path: Template path.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">folder</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">MainConfig</span><span class="p">()</span><span class="o">.</span><span class="n">home_folder</span><span class="si">}</span><span class="s1">/templates&#39;</span><span class="p">)</span>
+        <span class="n">folder</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">MainConfig</span><span class="p">()</span><span class="o">.</span><span class="n">home_folder</span><span class="si">}</span><span class="s2">/templates&quot;</span><span class="p">)</span>
         <span class="n">folder</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">folder</span></div>
 
+
 <div class="viewcode-block" id="RecruitMe.get_template_list">
 <a class="viewcode-back" href="../../../recruit_me.backend.recruit_me_core.html#recruit_me.backend.recruit_me_core.RecruitMe.get_template_list">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_template_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">list</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get_template_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve templates list.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            list: List of templates.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">file</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_template_folder</span><span class="p">()</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()</span> <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">is_file</span><span class="p">()])</span></div>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">file</span><span class="o">.</span><span class="n">name</span>
+                <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_template_folder</span><span class="p">()</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span>
+            <span class="p">]</span>
+        <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="RecruitMe.get_cv_folder">
 <a class="viewcode-back" href="../../../recruit_me.backend.recruit_me_core.html#recruit_me.backend.recruit_me_core.RecruitMe.get_cv_folder">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_cv_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Path</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get_cv_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve the cv path.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Path: Cv path.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">folder</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">MainConfig</span><span class="p">()</span><span class="o">.</span><span class="n">home_folder</span><span class="si">}</span><span class="s1">/cvs&#39;</span><span class="p">)</span>
+        <span class="n">folder</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">MainConfig</span><span class="p">()</span><span class="o">.</span><span class="n">home_folder</span><span class="si">}</span><span class="s2">/cvs&quot;</span><span class="p">)</span>
         <span class="n">folder</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">folder</span></div>
 
 
 <div class="viewcode-block" id="RecruitMe.get_cv_list">
 <a class="viewcode-back" href="../../../recruit_me.backend.recruit_me_core.html#recruit_me.backend.recruit_me_core.RecruitMe.get_cv_list">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_cv_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">list</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get_cv_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve cv list.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            list: List of cvs.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">file</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_cv_folder</span><span class="p">()</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()</span> <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">is_file</span><span class="p">()])</span></div>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">file</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_cv_folder</span><span class="p">()</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()</span> <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">is_file</span><span class="p">()]</span>
+        <span class="p">)</span></div>
 
-    
+
 <div class="viewcode-block" id="RecruitMe.send_email">
 <a class="viewcode-back" href="../../../recruit_me.backend.recruit_me_core.html#recruit_me.backend.recruit_me_core.RecruitMe.send_email">[docs]</a>
     <span class="k">def</span> <span class="nf">send_email</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">email_recipient</span><span class="p">:</span> <span class="n">EmailRecipient</span><span class="p">,</span>
-            <span class="n">email_object</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">cv_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">cover_letter_template_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">email_template_filename</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
-        <span class="p">)</span><span class="o">-&gt;</span><span class="nb">bool</span><span class="p">:</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">email_recipient</span><span class="p">:</span> <span class="n">EmailRecipient</span><span class="p">,</span>
+        <span class="n">email_object</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">cv_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">cover_letter_template_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">email_template_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Function used to send email to the recipient.</span>
 
 <span class="sd">        Args:</span>
@@ -159,41 +179,55 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            bool: Wether the email sending worked or not.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1">#Verify that files exist</span>
+        <span class="c1"># Verify that files exist</span>
         <span class="k">if</span> <span class="n">cv_filename</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_cv_list</span><span class="p">():</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Provided cv &#39;</span><span class="si">{</span><span class="n">cv_filename</span><span class="si">}</span><span class="s2">&#39; not in file list. Imported cvs are </span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">get_cv_list</span><span class="p">()))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Provided cv &#39;</span><span class="si">{</span><span class="n">cv_filename</span><span class="si">}</span><span class="s2">&#39; not in file list. Imported cvs are </span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">get_cv_list</span><span class="p">()))</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
         <span class="k">if</span> <span class="n">cover_letter_template_filename</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_template_list</span><span class="p">():</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Provided cover letter &#39;</span><span class="si">{</span><span class="n">cover_letter_template_filename</span><span class="si">}</span><span class="s2">&#39; not in file list. Imported templates are </span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">get_template_list</span><span class="p">()))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Provided cover letter &#39;</span><span class="si">{</span><span class="n">cover_letter_template_filename</span><span class="si">}</span><span class="s2">&#39; not in file list. Imported templates are </span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">get_template_list</span><span class="p">()))</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
         <span class="k">if</span> <span class="n">email_template_filename</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_template_list</span><span class="p">():</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Provided email &#39;</span><span class="si">{</span><span class="n">email_template_filename</span><span class="si">}</span><span class="s2">&#39; not in file list. Imported templates are </span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">get_template_list</span><span class="p">()))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        
-        <span class="c1">#Fill the templates</span>
-        <span class="n">filled_cover_letter_path</span> <span class="o">=</span> <span class="n">fill_gaps_in_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_template_folder</span><span class="p">()</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">cover_letter_template_filename</span><span class="p">),</span> <span class="n">email_recipient</span><span class="p">,</span> <span class="s1">&#39;Cover Letter&#39;</span><span class="p">)</span>
-        <span class="n">filled_email_template_path</span> <span class="o">=</span> <span class="n">fill_gaps_in_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_template_folder</span><span class="p">()</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">cover_letter_template_filename</span><span class="p">),</span> <span class="n">email_recipient</span><span class="p">,</span> <span class="s1">&#39;Email filled template&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Provided email &#39;</span><span class="si">{</span><span class="n">email_template_filename</span><span class="si">}</span><span class="s2">&#39; not in file list. Imported templates are </span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">get_template_list</span><span class="p">()))</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Fill the templates</span>
+        <span class="n">filled_cover_letter_path</span> <span class="o">=</span> <span class="n">fill_gaps_in_template</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_template_folder</span><span class="p">()</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">cover_letter_template_filename</span><span class="p">),</span>
+            <span class="n">email_recipient</span><span class="p">,</span>
+            <span class="s2">&quot;Cover Letter&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">filled_email_template_path</span> <span class="o">=</span> <span class="n">fill_gaps_in_template</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_template_folder</span><span class="p">()</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">cover_letter_template_filename</span><span class="p">),</span>
+            <span class="n">email_recipient</span><span class="p">,</span>
+            <span class="s2">&quot;Email filled template&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
         <span class="n">cv_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_cv_folder</span><span class="p">()</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">cv_filename</span><span class="p">)</span>
 
-        <span class="c1">#Send the email</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filled_email_template_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_out</span><span class="p">:</span>
+        <span class="c1"># Send the email</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filled_email_template_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_out</span><span class="p">:</span>
             <span class="n">email_content</span> <span class="o">=</span> <span class="n">file_out</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
         <span class="n">email_model</span> <span class="o">=</span> <span class="n">EmailModel</span><span class="p">(</span>
             <span class="n">recipient</span><span class="o">=</span><span class="n">email_recipient</span><span class="p">,</span>
             <span class="n">content</span><span class="o">=</span><span class="n">email_content</span><span class="p">,</span>
-            <span class="nb">object</span><span class="o">=</span> <span class="n">email_object</span><span class="p">,</span>
-            <span class="n">attached_files</span><span class="o">=</span><span class="p">[</span><span class="n">filled_cover_letter_path</span><span class="p">,</span> <span class="n">cv_path</span><span class="p">]</span>
+            <span class="nb">object</span><span class="o">=</span><span class="n">email_object</span><span class="p">,</span>
+            <span class="n">attached_files</span><span class="o">=</span><span class="p">[</span><span class="n">filled_cover_letter_path</span><span class="p">,</span> <span class="n">cv_path</span><span class="p">],</span>
         <span class="p">)</span>
         <span class="n">email_sent</span> <span class="o">=</span> <span class="n">send_email</span><span class="p">(</span><span class="n">email_model</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">email_sent</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;An error occured while sending the email.&quot;</span><span class="p">)</span>
-        
-        <span class="c1">#Add to csv save, could have used a db (even sqlite db) but seemed overkill</span>
+
+        <span class="c1"># Add to csv save, could have used a db (even sqlite db) but seemed overkill</span>
         <span class="n">entry_model</span> <span class="o">=</span> <span class="n">DataframeEntryModel</span><span class="p">(</span>
             <span class="n">first_sent</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
             <span class="n">last_sent</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
             <span class="n">recipient</span><span class="o">=</span><span class="n">email_recipient</span><span class="p">,</span>
             <span class="n">answer</span><span class="o">=</span><span class="n">AnswerType</span><span class="o">.</span><span class="n">WAITING</span><span class="p">,</span>
-            <span class="n">amount_of_email_sent</span><span class="o">=</span><span class="mi">1</span>
+            <span class="n">amount_of_email_sent</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">dataframe</span> <span class="o">=</span> <span class="n">retrieve_dataframe</span><span class="p">()</span>
         <span class="n">dataframe</span> <span class="o">=</span> <span class="n">add_entry_to_dataframe</span><span class="p">(</span><span class="n">entry_model</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">)</span>
@@ -202,7 +236,7 @@
 
 <div class="viewcode-block" id="RecruitMe.update_response_status">
 <a class="viewcode-back" href="../../../recruit_me.backend.recruit_me_core.html#recruit_me.backend.recruit_me_core.RecruitMe.update_response_status">[docs]</a>
-    <span class="k">def</span> <span class="nf">update_response_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">answer</span><span class="p">:</span> <span class="n">AnswerType</span><span class="p">)</span><span class="o">-&gt;</span><span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">update_response_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">answer</span><span class="p">:</span> <span class="n">AnswerType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;_summary_</span>
 
 <span class="sd">        Args:</span>
@@ -214,16 +248,16 @@
         <span class="n">dataframe</span> <span class="o">=</span> <span class="n">update_response_status</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">answer</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">)</span>
         <span class="n">save_dataframe</span><span class="p">(</span><span class="n">dataframe</span><span class="p">)</span></div>
 
-    
+
 <div class="viewcode-block" id="RecruitMe.relaunch_everyone">
 <a class="viewcode-back" href="../../../recruit_me.backend.recruit_me_core.html#recruit_me.backend.recruit_me_core.RecruitMe.relaunch_everyone">[docs]</a>
     <span class="k">def</span> <span class="nf">relaunch_everyone</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">email_object</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">cv_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">cover_letter_template_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">email_template_filename</span><span class="p">:</span><span class="nb">str</span>
-        <span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">email_object</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">cv_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">cover_letter_template_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">email_template_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Relaunch everyone who did not answer yet.</span>
 
 <span class="sd">        Args:</span>
@@ -231,7 +265,7 @@
 <span class="sd">            cv_filename (str): Cv filename.</span>
 <span class="sd">            cover_letter_template_filename (str): cover letter template filename.</span>
 <span class="sd">            email_template_filename (str): email template filename.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Return:</span>
 <span class="sd">            int: number of people relaunched</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -248,7 +282,7 @@
                 <span class="n">email_object</span><span class="p">,</span>
                 <span class="n">cv_filename</span><span class="p">,</span>
                 <span class="n">cover_letter_template_filename</span><span class="p">,</span>
-                <span class="n">email_template_filename</span>
+                <span class="n">email_template_filename</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="n">people_relaunched</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">people_relaunched</span></div>

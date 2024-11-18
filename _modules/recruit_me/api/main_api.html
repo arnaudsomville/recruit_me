@@ -78,14 +78,18 @@
 <span class="kn">import</span> <span class="nn">uvicorn</span>
 
 <span class="kn">from</span> <span class="nn">recruit_me.backend.recruit_me_core</span> <span class="kn">import</span> <span class="n">RecruitMe</span>
-<span class="kn">from</span> <span class="nn">recruit_me.models.endpoint_models</span> <span class="kn">import</span> <span class="n">EmailContentEndpointModel</span><span class="p">,</span> <span class="n">EmailSendingEndpointModel</span><span class="p">,</span> <span class="n">UpdateAnswerEndpointModel</span>
+<span class="kn">from</span> <span class="nn">recruit_me.models.endpoint_models</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">EmailContentEndpointModel</span><span class="p">,</span>
+    <span class="n">EmailSendingEndpointModel</span><span class="p">,</span>
+    <span class="n">UpdateAnswerEndpointModel</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span> <span class="nn">recruit_me.utils.configuration</span> <span class="kn">import</span> <span class="n">MainConfig</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span>
     <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Recruit_me&quot;</span><span class="p">,</span>
     <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Program that automates the process of sending CVs and tracking the status of submitted applications.&quot;</span><span class="p">,</span>
     <span class="n">summary</span><span class="o">=</span><span class="s2">&quot;Life is to short to have to spend energy on sending CVs.&quot;</span><span class="p">,</span>
-    <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.0.1&quot;</span>
+    <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">STATUS_SUCCESS</span> <span class="o">=</span> <span class="mi">200</span>
@@ -93,22 +97,24 @@
 <span class="n">STATUS_INTERNAL_ERROR</span> <span class="o">=</span> <span class="mi">500</span>
 <span class="n">STATUS_BAD_REQUEST</span> <span class="o">=</span> <span class="mi">400</span>
 
+
 <div class="viewcode-block" id="get_health">
 <a class="viewcode-back" href="../../../recruit_me.api.main_api.html#recruit_me.api.main_api.get_health">[docs]</a>
-<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/health&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">get_health</span><span class="p">()</span><span class="o">-&gt;</span><span class="nb">dict</span><span class="p">:</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/health&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_health</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Health endpoint.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        int: Status 200 if everything is fine.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;status_code&quot;</span> <span class="p">:</span> <span class="n">STATUS_SUCCESS</span><span class="p">}</span></div>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="n">STATUS_SUCCESS</span><span class="p">}</span></div>
+
 
 
 <div class="viewcode-block" id="upload_template">
 <a class="viewcode-back" href="../../../recruit_me.api.main_api.html#recruit_me.api.main_api.upload_template">[docs]</a>
-<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/upload_template&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">upload_template</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="n">UploadFile</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">dict</span><span class="p">:</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/upload_template&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">upload_template</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="n">UploadFile</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Permit to upload a template to the available resources.</span>
 
 <span class="sd">    Args:</span>
@@ -119,40 +125,40 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">file</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">file</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-    
+
     <span class="n">template_location</span> <span class="o">=</span> <span class="n">RecruitMe</span><span class="p">()</span><span class="o">.</span><span class="n">get_template_folder</span><span class="p">()</span>
-    <span class="n">authorized_template_formats</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;.html&#39;</span><span class="p">]</span>
+    <span class="n">authorized_template_formats</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;.html&quot;</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">file</span><span class="o">.</span><span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">authorized_template_formats</span><span class="p">)):</span>
-        <span class="k">return</span> <span class="p">{</span> 
-            <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">STATUS_BAD_REQUEST</span><span class="p">,</span>
-            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Unauthorized file format. The ones accepted are </span><span class="si">{</span><span class="s2">&quot; ,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="n">authorized_template_formats</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span>
-            <span class="p">}</span>
-
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="n">STATUS_BAD_REQUEST</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Unauthorized file format. The ones accepted are </span><span class="si">{</span><span class="s2">&quot; ,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="n">authorized_template_formats</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
 
     <span class="k">if</span> <span class="n">template_location</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-        <span class="k">return</span> <span class="p">{</span> 
-            <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">STATUS_FILE_ALREADY_EXISTS</span><span class="p">,</span>
-            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;The template already exists.&#39;</span>
-            <span class="p">}</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="n">STATUS_FILE_ALREADY_EXISTS</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;The template already exists.&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="k">with</span> <span class="n">template_location</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">buffer</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">template_location</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">buffer</span><span class="p">:</span>
             <span class="n">shutil</span><span class="o">.</span><span class="n">copyfileobj</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">{</span> 
-            <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">STATUS_INTERNAL_ERROR</span><span class="p">,</span>
-            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Internal error while saving : </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="n">STATUS_INTERNAL_ERROR</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Internal error while saving : </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="p">}</span>
     <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">STATUS_SUCCESS</span><span class="p">,</span>
-        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Template saved as </span><span class="si">{</span><span class="n">file</span><span class="o">.</span><span class="n">filename</span><span class="si">}</span><span class="s1">.&#39;</span>
+        <span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="n">STATUS_SUCCESS</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Template saved as </span><span class="si">{</span><span class="n">file</span><span class="o">.</span><span class="n">filename</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">,</span>
     <span class="p">}</span></div>
 
-    
+
+
 <div class="viewcode-block" id="upload_cv">
 <a class="viewcode-back" href="../../../recruit_me.api.main_api.html#recruit_me.api.main_api.upload_cv">[docs]</a>
-<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/upload_cv&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">upload_cv</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="n">UploadFile</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">dict</span><span class="p">:</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/upload_cv&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">upload_cv</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="n">UploadFile</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Permit to upload a cv to the available resources.</span>
 
 <span class="sd">    Args:</span>
@@ -163,40 +169,40 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">file</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">file</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-    
+
     <span class="n">template_location</span> <span class="o">=</span> <span class="n">RecruitMe</span><span class="p">()</span><span class="o">.</span><span class="n">get_cv_folder</span><span class="p">()</span>
-    <span class="n">authorized_template_formats</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;.pdf&#39;</span><span class="p">]</span>
+    <span class="n">authorized_template_formats</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.pdf&quot;</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">file</span><span class="o">.</span><span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">authorized_template_formats</span><span class="p">)):</span>
-        <span class="k">return</span> <span class="p">{</span> 
-            <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">STATUS_BAD_REQUEST</span><span class="p">,</span>
-            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Unauthorized file format. The ones accepted are </span><span class="si">{</span><span class="s2">&quot; ,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="n">authorized_template_formats</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span>
-            <span class="p">}</span>
-
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="n">STATUS_BAD_REQUEST</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Unauthorized file format. The ones accepted are </span><span class="si">{</span><span class="s2">&quot; ,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="n">authorized_template_formats</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
 
     <span class="k">if</span> <span class="n">template_location</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-        <span class="k">return</span> <span class="p">{</span> 
-            <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">STATUS_FILE_ALREADY_EXISTS</span><span class="p">,</span>
-            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;The cv already exists.&#39;</span>
-            <span class="p">}</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="n">STATUS_FILE_ALREADY_EXISTS</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;The cv already exists.&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="k">with</span> <span class="n">template_location</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">buffer</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">template_location</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">buffer</span><span class="p">:</span>
             <span class="n">shutil</span><span class="o">.</span><span class="n">copyfileobj</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">{</span> 
-            <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">STATUS_INTERNAL_ERROR</span><span class="p">,</span>
-            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Internal error while saving : </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="n">STATUS_INTERNAL_ERROR</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Internal error while saving : </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="p">}</span>
     <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">STATUS_SUCCESS</span><span class="p">,</span>
-        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Template saved as </span><span class="si">{</span><span class="n">file</span><span class="o">.</span><span class="n">filename</span><span class="si">}</span><span class="s1">.&#39;</span>
+        <span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="n">STATUS_SUCCESS</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Template saved as </span><span class="si">{</span><span class="n">file</span><span class="o">.</span><span class="n">filename</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">,</span>
     <span class="p">}</span></div>
+
 
 
 <div class="viewcode-block" id="get_cv_list">
 <a class="viewcode-back" href="../../../recruit_me.api.main_api.html#recruit_me.api.main_api.get_cv_list">[docs]</a>
-<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/get_cv_list&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">get_cv_list</span><span class="p">()</span><span class="o">-&gt;</span><span class="nb">dict</span><span class="p">:</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/get_cv_list&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_cv_list</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve the list of uploaded cvs.</span>
 
 <span class="sd">    Returns:</span>
@@ -206,19 +212,17 @@
         <span class="n">cv_list</span> <span class="o">=</span> <span class="n">RecruitMe</span><span class="p">()</span><span class="o">.</span><span class="n">get_cv_list</span><span class="p">()</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">STATUS_INTERNAL_ERROR</span><span class="p">,</span>
-            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Internal error : </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="n">STATUS_INTERNAL_ERROR</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Internal error : </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="p">}</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">STATUS_SUCCESS</span><span class="p">,</span>
-        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">cv_list</span><span class="p">))</span>
-    <span class="p">}</span></div>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="n">STATUS_SUCCESS</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">cv_list</span><span class="p">))}</span></div>
+
 
 
 <div class="viewcode-block" id="get_template_list">
 <a class="viewcode-back" href="../../../recruit_me.api.main_api.html#recruit_me.api.main_api.get_template_list">[docs]</a>
-<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/get_template_list&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">get_template_list</span><span class="p">()</span><span class="o">-&gt;</span><span class="nb">dict</span><span class="p">:</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/get_template_list&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_template_list</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve the list of uploaded templates.</span>
 
 <span class="sd">    Returns:</span>
@@ -228,19 +232,17 @@
         <span class="n">cv_list</span> <span class="o">=</span> <span class="n">RecruitMe</span><span class="p">()</span><span class="o">.</span><span class="n">get_template_list</span><span class="p">()</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">STATUS_INTERNAL_ERROR</span><span class="p">,</span>
-            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Internal error : </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="n">STATUS_INTERNAL_ERROR</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Internal error : </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="p">}</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">STATUS_SUCCESS</span><span class="p">,</span>
-        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">cv_list</span><span class="p">))</span>
-    <span class="p">}</span></div>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="n">STATUS_SUCCESS</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">cv_list</span><span class="p">))}</span></div>
+
 
 
 <div class="viewcode-block" id="send_email">
 <a class="viewcode-back" href="../../../recruit_me.api.main_api.html#recruit_me.api.main_api.send_email">[docs]</a>
-<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/send_email&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">send_email</span><span class="p">(</span><span class="n">email_data</span><span class="p">:</span> <span class="n">EmailSendingEndpointModel</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">dict</span><span class="p">:</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/send_email&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">send_email</span><span class="p">(</span><span class="n">email_data</span><span class="p">:</span> <span class="n">EmailSendingEndpointModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Endpoint used to send emails.</span>
 
 <span class="sd">    Args:</span>
@@ -251,15 +253,16 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">RecruitMe</span><span class="p">()</span><span class="o">.</span><span class="n">send_email</span><span class="p">(</span>
         <span class="n">email_recipient</span><span class="o">=</span><span class="n">email_data</span><span class="o">.</span><span class="n">email_recipient</span><span class="p">,</span>
-        <span class="n">email_object</span><span class="o">=</span> <span class="n">email_data</span><span class="o">.</span><span class="n">email_content</span><span class="o">.</span><span class="n">email_object</span><span class="p">,</span>
+        <span class="n">email_object</span><span class="o">=</span><span class="n">email_data</span><span class="o">.</span><span class="n">email_content</span><span class="o">.</span><span class="n">email_object</span><span class="p">,</span>
         <span class="n">cv_filename</span><span class="o">=</span><span class="n">email_data</span><span class="o">.</span><span class="n">email_content</span><span class="o">.</span><span class="n">cv_filename</span><span class="p">,</span>
         <span class="n">cover_letter_template_filename</span><span class="o">=</span><span class="n">email_data</span><span class="o">.</span><span class="n">email_content</span><span class="o">.</span><span class="n">cover_letter_template_filename</span><span class="p">,</span>
-        <span class="n">email_template_filename</span><span class="o">=</span><span class="n">email_data</span><span class="o">.</span><span class="n">email_content</span><span class="o">.</span><span class="n">email_template_filename</span>
+        <span class="n">email_template_filename</span><span class="o">=</span><span class="n">email_data</span><span class="o">.</span><span class="n">email_content</span><span class="o">.</span><span class="n">email_template_filename</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">STATUS_SUCCESS</span><span class="p">,</span>
-        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Email successfully sent to </span><span class="si">{</span><span class="n">email_data</span><span class="o">.</span><span class="n">email_recipient</span><span class="o">.</span><span class="n">email</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="n">STATUS_SUCCESS</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Email successfully sent to </span><span class="si">{</span><span class="n">email_data</span><span class="o">.</span><span class="n">email_recipient</span><span class="o">.</span><span class="n">email</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
     <span class="p">}</span></div>
+
 
 
 <div class="viewcode-block" id="download_summary">
@@ -271,69 +274,66 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        FileResponse: The requested file if it exists.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">file_path</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">MainConfig</span><span class="p">()</span><span class="o">.</span><span class="n">home_folder</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">MainConfig</span><span class="p">()</span><span class="o">.</span><span class="n">csv_file</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">file_path</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">MainConfig</span><span class="p">()</span><span class="o">.</span><span class="n">home_folder</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">MainConfig</span><span class="p">()</span><span class="o">.</span><span class="n">csv_file</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">file_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">STATUS_SUCCESS</span><span class="p">,</span>
-            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;The CSV is empty, send emails first.&#39;</span>
+            <span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="n">STATUS_SUCCESS</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;The CSV is empty, send emails first.&quot;</span><span class="p">,</span>
         <span class="p">}</span>
 
     <span class="k">return</span> <span class="n">FileResponse</span><span class="p">(</span>
         <span class="n">path</span><span class="o">=</span><span class="n">file_path</span><span class="p">,</span>
         <span class="n">media_type</span><span class="o">=</span><span class="s2">&quot;application/octet-stream&quot;</span><span class="p">,</span>
-        <span class="n">filename</span><span class="o">=</span><span class="n">MainConfig</span><span class="p">()</span><span class="o">.</span><span class="n">csv_file</span>
+        <span class="n">filename</span><span class="o">=</span><span class="n">MainConfig</span><span class="p">()</span><span class="o">.</span><span class="n">csv_file</span><span class="p">,</span>
     <span class="p">)</span></div>
+
 
 
 <div class="viewcode-block" id="update_answer">
 <a class="viewcode-back" href="../../../recruit_me.api.main_api.html#recruit_me.api.main_api.update_answer">[docs]</a>
-<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/update_answer&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">update_answer</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">UpdateAnswerEndpointModel</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">dict</span><span class="p">:</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/update_answer&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">update_answer</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">UpdateAnswerEndpointModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">RecruitMe</span><span class="p">()</span><span class="o">.</span><span class="n">update_response_status</span><span class="p">(</span>
-            <span class="n">data</span><span class="o">.</span><span class="n">email</span><span class="p">,</span>
-            <span class="n">data</span><span class="o">.</span><span class="n">new_answer</span>
-        <span class="p">)</span>
+        <span class="n">RecruitMe</span><span class="p">()</span><span class="o">.</span><span class="n">update_response_status</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">new_answer</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">STATUS_INTERNAL_ERROR</span><span class="p">,</span>
-            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Internal error : </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="n">STATUS_INTERNAL_ERROR</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Internal error : </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="p">}</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">STATUS_SUCCESS</span><span class="p">,</span>
-        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Data updated&#39;</span>
-    <span class="p">}</span></div>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="n">STATUS_SUCCESS</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Data updated&quot;</span><span class="p">}</span></div>
+
 
 
 <div class="viewcode-block" id="relaunch_everyone">
 <a class="viewcode-back" href="../../../recruit_me.api.main_api.html#recruit_me.api.main_api.relaunch_everyone">[docs]</a>
-<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/relaunch_everyone&#39;</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/relaunch_everyone&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">relaunch_everyone</span><span class="p">(</span><span class="n">email_data</span><span class="p">:</span> <span class="n">EmailContentEndpointModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Endpoint to relaunch everyone who is not marked as </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Endpoint to relaunch everyone who is not marked as</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        email_data (EmailSendingEndpointModel): Data containing the information on </span>
+<span class="sd">        email_data (EmailSendingEndpointModel): Data containing the information on</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        _type_: _description_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">people_relaunched</span> <span class="o">=</span> <span class="n">RecruitMe</span><span class="p">()</span><span class="o">.</span><span class="n">relaunch_everyone</span><span class="p">(</span>
-        <span class="n">email_object</span><span class="o">=</span> <span class="n">email_data</span><span class="o">.</span><span class="n">email_object</span><span class="p">,</span>
+        <span class="n">email_object</span><span class="o">=</span><span class="n">email_data</span><span class="o">.</span><span class="n">email_object</span><span class="p">,</span>
         <span class="n">cv_filename</span><span class="o">=</span><span class="n">email_data</span><span class="o">.</span><span class="n">cv_filename</span><span class="p">,</span>
         <span class="n">cover_letter_template_filename</span><span class="o">=</span><span class="n">email_data</span><span class="o">.</span><span class="n">cover_letter_template_filename</span><span class="p">,</span>
-        <span class="n">email_template_filename</span><span class="o">=</span><span class="n">email_data</span><span class="o">.</span><span class="n">email_template_filename</span>
+        <span class="n">email_template_filename</span><span class="o">=</span><span class="n">email_data</span><span class="o">.</span><span class="n">email_template_filename</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">STATUS_SUCCESS</span><span class="p">,</span>
-        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Email successfully relaunched </span><span class="si">{</span><span class="n">people_relaunched</span><span class="si">}</span><span class="s1"> people&#39;</span>
+        <span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="n">STATUS_SUCCESS</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Email successfully relaunched </span><span class="si">{</span><span class="n">people_relaunched</span><span class="si">}</span><span class="s2"> people&quot;</span><span class="p">,</span>
     <span class="p">}</span></div>
 
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span> <span class="c1">#pragma: no cover</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
     <span class="n">uvicorn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;main_api:app&quot;</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8100</span><span class="p">,</span> <span class="n">reload</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
 </pre></div>
 
            </div>
