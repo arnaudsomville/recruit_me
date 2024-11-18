@@ -90,6 +90,20 @@
 <span id="recruit-me-api-main-api-module"></span><h1>recruit_me.api.main_api module<a class="headerlink" href="#module-recruit_me.api.main_api" title="Link to this heading"></a></h1>
 <p>Define the api endpoints.</p>
 <dl class="py function">
+<dt class="sig sig-object py" id="recruit_me.api.main_api.download_summary">
+<span class="sig-prename descclassname"><span class="pre">recruit_me.api.main_api.</span></span><span class="sig-name descname"><span class="pre">download_summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">FileResponse</span></span></span><a class="reference internal" href="_modules/recruit_me/api/main_api.html#download_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#recruit_me.api.main_api.download_summary" title="Link to this definition"></a></dt>
+<dd><p>Endpoint to download the summary file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The requested file if it exists.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>FileResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="recruit_me.api.main_api.get_cv_list">
 <span class="sig-prename descclassname"><span class="pre">recruit_me.api.main_api.</span></span><span class="sig-name descname"><span class="pre">get_cv_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/recruit_me/api/main_api.html#get_cv_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#recruit_me.api.main_api.get_cv_list" title="Link to this definition"></a></dt>
 <dd><p>Retrieve the list of uploaded cvs.</p>
@@ -127,6 +141,23 @@
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="recruit_me.api.main_api.send_email">
+<span class="sig-prename descclassname"><span class="pre">recruit_me.api.main_api.</span></span><span class="sig-name descname"><span class="pre">send_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="recruit_me.models.endpoint_models.html#recruit_me.models.endpoint_models.EmailSendingEndpointModel" title="recruit_me.models.endpoint_models.EmailSendingEndpointModel"><span class="pre">EmailSendingEndpointModel</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/recruit_me/api/main_api.html#send_email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#recruit_me.api.main_api.send_email" title="Link to this definition"></a></dt>
+<dd><p>Endpoint used to send emails.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>email_data</strong> (<a class="reference internal" href="recruit_me.models.endpoint_models.html#recruit_me.models.endpoint_models.EmailSendingEndpointModel" title="recruit_me.models.endpoint_models.EmailSendingEndpointModel"><em>EmailSendingEndpointModel</em></a>) – _description_</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>

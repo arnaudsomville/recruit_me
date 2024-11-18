@@ -8,6 +8,7 @@ Submodules
    :maxdepth: 4
 
    recruit_me.models.data_models
+   recruit_me.models.endpoint_models
 
 Module contents
 ---------------
