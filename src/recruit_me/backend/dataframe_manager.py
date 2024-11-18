@@ -9,6 +9,8 @@ import pandas as pd
 from recruit_me.models.data_models import AnswerType, DataframeEntryModel, EmailRecipient
 from recruit_me.utils.configuration import MainConfig
 
+#TODO : Transform into a DataframeManager class that automatically call retrieve_dataframe at init.
+
 def add_entry_to_dataframe(data: DataframeEntryModel, dataframe: pd.DataFrame)->pd.DataFrame:
     """Add an entry to the Dataframe managing the sent emails. If the entry already exist, it will increment the amount of email sent.
 
@@ -87,6 +89,37 @@ def update_response_status(email: str, status: AnswerType, dataframe: pd.DataFra
     if email in dataframe["recipient_email"].values:
         dataframe.loc[dataframe["recipient_email"] == email, "answer"] = status
     return dataframe
+
+def dataframe_to_list(dataframe: pd.DataFrame) -> list[DataframeEntryModel]:
+    """Convert the rows of the dataframe to a list of DataframeEntryModel.
+
+    Args:
+        dataframe (pd.DataFrame): DataFrame contenant les données.
+
+    Returns:
+        list[DataframeEntryModel]: Liste des objets DataframeEntryModel.
+    """
+    result = []
+    for _, row in dataframe.iterrows():
+        # Reconstruire l'objet EmailRecipient
+        recipient = EmailRecipient(
+            name=row["recipient_name"],
+            email=row["recipient_email"],
+            company=row["recipient_company"],
+            position=row["recipient_position"]
+        )
+
+        # Reconstruire l'objet DataframeEntryModel
+        entry = DataframeEntryModel(
+            first_sent=datetime.fromisoformat(row["first_sent"]),
+            last_sent=datetime.fromisoformat(row["last_sent"]),
+            recipient=recipient,
+            answer=row["answer"],
+            amount_of_email_sent=row["amount_of_email_sent"]
+        )
+        result.append(entry)
+
+    return result
 
 if __name__ == '__main__': #pragma: no-cover
     dataframe_entries = [

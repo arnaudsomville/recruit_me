@@ -1,9 +1,12 @@
 """Test the recruit_me_core methods."""
 
+from datetime import datetime
 from pathlib import Path
 from unittest.mock import mock_open, patch
+
+import pandas as pd
 from recruit_me.backend.recruit_me_core import RecruitMe
-from recruit_me.models.data_models import AnswerType, EmailRecipient
+from recruit_me.models.data_models import AnswerType, DataframeEntryModel, EmailRecipient
 from recruit_me.utils.configuration import MainConfig
 
 
@@ -142,3 +145,81 @@ def test_update_response_status():
         mock_retrieve_dataframe.assert_called_once()
         mock_update_response_status.assert_called_once_with(email, answer, mock_dataframe)
         mock_save_dataframe.assert_called_once_with(mock_dataframe)
+
+def test_relaunch_everyone():
+    """Test the relaunch_everyone method, ensuring only unanswered emails are resent."""
+    
+    # Prepare test data
+    dummy_dataframe_entries = [
+        DataframeEntryModel(
+            first_sent=datetime(2023, 1, 1, 10, 0),
+            last_sent=datetime(2023, 1, 2, 15, 30),
+            recipient=EmailRecipient(
+                name="Homer Simpson",
+                email="homer@duffbrewery.com",
+                company="Duff Brewery",
+                position="Nuclear Safety Inspector"
+            ),
+            answer=AnswerType.WAITING,
+            amount_of_email_sent=1
+        ),
+        DataframeEntryModel(
+            first_sent=datetime(2023, 1, 5, 9, 0),
+            last_sent=datetime(2023, 1, 6, 11, 0),
+            recipient=EmailRecipient(
+                name="Tony Stark",
+                email="ironman@starkindustries.com",
+                company="Stark Industries",
+                position="CEO"
+            ),
+            answer=AnswerType.ACCEPTED,
+            amount_of_email_sent=1
+        ),
+        DataframeEntryModel(
+            first_sent=datetime(2023, 1, 10, 8, 0),
+            last_sent=datetime(2023, 1, 12, 16, 45),
+            recipient=EmailRecipient(
+                name="Rick Sanchez",
+                email="rick@interdimensionalmail.com",
+                company="Interdimensional Inc.",
+                position="Mad Scientist"
+            ),
+            answer=AnswerType.WAITING,
+            amount_of_email_sent=2
+        )
+    ]
+
+    # Create the dataframe to mock retrieve_dataframe
+    expected_dataframe = pd.DataFrame(data=[data.to_dict() for data in dummy_dataframe_entries])
+
+    # Mock retrieve_dataframe and send_email
+    with patch("recruit_me.backend.recruit_me_core.retrieve_dataframe", return_value=expected_dataframe), \
+         patch.object(RecruitMe, "send_email") as mock_send_email:
+
+        # Create the RecruitMe instance
+        recruit_me = RecruitMe()
+
+        # Call the method
+        recruit_me.relaunch_everyone(
+            email_object="Reminder: Opportunity",
+            cv_filename="cv.pdf",
+            cover_letter_template_filename="cover_letter_template.txt",
+            email_template_filename="email_template.txt"
+        )
+
+        # Ensure send_email was called only for entries with AnswerType.WAITING
+        assert mock_send_email.call_count == 2
+        mock_send_email.assert_any_call(
+            dummy_dataframe_entries[0].recipient,
+            "Reminder: Opportunity",
+            "cv.pdf",
+            "cover_letter_template.txt",
+            "email_template.txt"
+        )
+        mock_send_email.assert_any_call(
+            dummy_dataframe_entries[2].recipient,
+            "Reminder: Opportunity",
+            "cv.pdf",
+            "cover_letter_template.txt",
+            "email_template.txt"
+        )

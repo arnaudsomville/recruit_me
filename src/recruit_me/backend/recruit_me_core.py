@@ -3,7 +3,7 @@
 from datetime import datetime
 from pathlib import Path
 
-from recruit_me.backend.dataframe_manager import add_entry_to_dataframe, retrieve_dataframe, save_dataframe, update_response_status
+from recruit_me.backend.dataframe_manager import add_entry_to_dataframe, dataframe_to_list, retrieve_dataframe, save_dataframe, update_response_status
 from recruit_me.backend.email_sender import send_email
 from recruit_me.backend.template_filler import fill_gaps_in_template
 from recruit_me.models.data_models import AnswerType, DataframeEntryModel, EmailModel, EmailRecipient
@@ -122,3 +122,39 @@ class RecruitMe:
         dataframe = retrieve_dataframe()
         dataframe = update_response_status(email, answer, dataframe)
         save_dataframe(dataframe)
+    
+    def relaunch_everyone(
+            self,
+            email_object: str,
+            cv_filename: str,
+            cover_letter_template_filename: str,
+            email_template_filename:str
+        )->int:
+        """Relaunch everyone who did not answer yet.
+
+        Args:
+            email_object (str): Object of the emails.
+            cv_filename (str): Cv filename.
+            cover_letter_template_filename (str): cover letter template filename.
+            email_template_filename (str): email template filename.
+        
+        Return:
+            int: number of people relaunched
+        """
+        dataframe = retrieve_dataframe()
+        sent_email_list = dataframe_to_list(dataframe)
+
+        people_relaunched = 0
+
+        for email_data in sent_email_list:
+            if email_data.answer != AnswerType.WAITING:
+                continue
+            self.send_email(
+                email_data.recipient,
+                email_object,
+                cv_filename,
+                cover_letter_template_filename,
+                email_template_filename
+            )
+            people_relaunched += 1
+        return people_relaunched

@@ -7,7 +7,7 @@ from fastapi.responses import FileResponse
 import uvicorn
 
 from recruit_me.backend.recruit_me_core import RecruitMe
-from recruit_me.models.endpoint_models import EmailSendingEndpointModel, UpdateAnswerEndpointModel
+from recruit_me.models.endpoint_models import EmailContentEndpointModel, EmailSendingEndpointModel, UpdateAnswerEndpointModel
 from recruit_me.utils.configuration import MainConfig
 
 app = FastAPI(
@@ -163,10 +163,10 @@ def send_email(email_data: EmailSendingEndpointModel)->dict:
     """
     RecruitMe().send_email(
         email_recipient=email_data.email_recipient,
-        email_object= email_data.email_object,
-        cv_filename=email_data.cv_filename,
-        cover_letter_template_filename=email_data.cover_letter_template_filename,
-        email_template_filename=email_data.email_template_filename
+        email_object= email_data.email_content.email_object,
+        cv_filename=email_data.email_content.cv_filename,
+        cover_letter_template_filename=email_data.email_content.cover_letter_template_filename,
+        email_template_filename=email_data.email_content.email_template_filename
     )
     return {
         'status_code': STATUS_SUCCESS,
@@ -210,6 +210,28 @@ def update_answer(data: UpdateAnswerEndpointModel)->dict:
         'status_code': STATUS_SUCCESS,
         'description': 'Data updated'
     }
+
+@app.post('/relaunch_everyone')
+def relaunch_everyone(email_data: EmailContentEndpointModel):
+    """Endpoint to relaunch everyone who is not marked as 
+
+    Args:
+        email_data (EmailSendingEndpointModel): Data containing the information on 
+
+    Returns:
+        _type_: _description_
+    """
+    people_relaunched = RecruitMe().relaunch_everyone(
+        email_object= email_data.email_object,
+        cv_filename=email_data.cv_filename,
+        cover_letter_template_filename=email_data.cover_letter_template_filename,
+        email_template_filename=email_data.email_template_filename
+    )
+    return {
+        'status_code': STATUS_SUCCESS,
+        'description': f'Email successfully relaunched {people_relaunched} people'
+    }
+
 
 if __name__ == '__main__': #pragma: no cover
     uvicorn.run("main_api:app", host="0.0.0.0", port=8100, reload=True)

@@ -111,10 +111,12 @@ def test_send_email_endpoint():
             "company": "SpaceX",
             "position": "CEO"
         },
-        "email_object": "Join SpaceX!",
-        "cv_filename": "cv.pdf",
-        "cover_letter_template_filename": "cover_letter_template.txt",
-        "email_template_filename": "email_template.txt"
+        "email_content":{
+            "email_object": "Join SpaceX!",
+            "cv_filename": "cv.pdf",
+            "cover_letter_template_filename": "cover_letter_template.txt",
+            "email_template_filename": "email_template.txt"
+        }
     }
 
     # Mock RecruitMe.send_email
@@ -129,10 +131,10 @@ def test_send_email_endpoint():
         }
         mock_send_email.assert_called_once_with(
             email_recipient=EmailRecipient(**email_data["email_recipient"]),
-            email_object=email_data["email_object"],
-            cv_filename=email_data["cv_filename"],
-            cover_letter_template_filename=email_data["cover_letter_template_filename"],
-            email_template_filename=email_data["email_template_filename"]
+            email_object=email_data["email_content"]["email_object"],
+            cv_filename=email_data["email_content"]["cv_filename"],
+            cover_letter_template_filename=email_data["email_content"]["cover_letter_template_filename"],
+            email_template_filename=email_data["email_content"]["email_template_filename"]
         )
 
 def test_download_summary_existing_file():
@@ -209,4 +211,36 @@ def test_update_answer_failure():
         # Vérifier l'appel du mock
         mock_update_response_status.assert_called_once_with(
             test_data["email"], test_data["new_answer"]
+        )
+
+def test_relaunch_everyone_success():
+    """Test the /relaunch_everyone endpoint when the operation is successful."""
+
+    # Prepare test data
+    test_data = {
+        "email_object": "Follow-up: Exciting Opportunity",
+        "cv_filename": "cv.pdf",
+        "cover_letter_template_filename": "cover_letter_template.txt",
+        "email_template_filename": "email_template.txt"
+    }
+
+    # Mock the relaunch_everyone method
+    with patch("recruit_me.api.main_api.RecruitMe.relaunch_everyone", return_value=5) as mock_relaunch_everyone:
+
+        # Call the endpoint
+        response = client.post("/relaunch_everyone", json=test_data)
+
+        # Assertions
+        assert response.status_code == 200
+        assert response.json() == {
+            'status_code': 200,
+            'description': 'Email successfully relaunched 5 people'
+        }
+
+        # Verify that the mocked method was called with the correct arguments
+        mock_relaunch_everyone.assert_called_once_with(
+            email_object="Follow-up: Exciting Opportunity",
+            cv_filename="cv.pdf",
+            cover_letter_template_filename="cover_letter_template.txt",
+            email_template_filename="email_template.txt"
         )

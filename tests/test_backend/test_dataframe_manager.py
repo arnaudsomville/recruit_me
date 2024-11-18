@@ -7,7 +7,7 @@ from pathlib import Path
 import shutil
 import pandas.testing as pdt
 import pandas as pd
-from recruit_me.backend.dataframe_manager import add_entry_to_dataframe, retrieve_dataframe, save_dataframe, update_response_status
+from recruit_me.backend.dataframe_manager import add_entry_to_dataframe, dataframe_to_list, retrieve_dataframe, save_dataframe, update_response_status
 from recruit_me.models.data_models import AnswerType, DataframeEntryModel, EmailRecipient
 from recruit_me.utils.configuration import MainConfig
 from tests.conftest import dummy_dataframe_entries, expected_columns
@@ -269,3 +269,22 @@ def test_update_response_status():
     )
     # Le DataFrame reste inchangé
     pdt.assert_frame_equal(updated_dataframe, expected_dataframe)
+
+def test_dataframe_to_list() -> None:
+    """Test the dataframe_to_list method."""
+    dummy_dataframe = pd.DataFrame(data=[data.to_dict() for data in dummy_dataframe_entries])
+
+    # Appeler la méthode à tester
+    result = dataframe_to_list(dummy_dataframe)
+
+    # Vérifier que la liste retournée correspond aux entrées initiales
+    assert len(result) == len(dummy_dataframe_entries)
+    for original, converted in zip(dummy_dataframe_entries, result):
+        assert original.first_sent == converted.first_sent
+        assert original.last_sent == converted.last_sent
+        assert original.recipient.name == converted.recipient.name
+        assert original.recipient.email == converted.recipient.email
+        assert original.recipient.company == converted.recipient.company
+        assert original.recipient.position == converted.recipient.position
+        assert original.answer == converted.answer
+        assert original.amount_of_email_sent == converted.amount_of_email_sent

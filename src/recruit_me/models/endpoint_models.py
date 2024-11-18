@@ -9,14 +9,18 @@ default_email_recipient = EmailRecipient(
     company='SpaceX',
     position='CEO'
 )
-
-class EmailSendingEndpointModel(BaseModel):
+class EmailContentEndpointModel(BaseModel):
     """Model used for the send_email endpoint"""
-    email_recipient: EmailRecipient = default_email_recipient
     email_object: str = 'Interest in Career Opportunity'
     cv_filename: str = 'my_cv.pdf'
     cover_letter_template_filename: str = 'my_cover_letter_template.txt'
     email_template_filename:str = 'my_email_template.txt'
+
+class EmailSendingEndpointModel(BaseModel):
+    """Model used for the send_email endpoint"""
+    email_recipient: EmailRecipient = default_email_recipient
+    email_content: EmailContentEndpointModel
+
 
 class UpdateAnswerEndpointModel(BaseModel):
     """Model used for the update_answer model."""
