@@ -8,6 +8,7 @@ from recruit_me.backend.email_sender import send_email
 from recruit_me.backend.template_filler import fill_gaps_in_template
 from recruit_me.models.data_models import AnswerType, DataframeEntryModel, EmailModel, EmailRecipient
 from recruit_me.utils.configuration import MainConfig
+from recruit_me.utils.home_folder_management import verify_home_folder
 
 
 class RecruitMe:
@@ -15,7 +16,7 @@ class RecruitMe:
 
     def __init__(self) -> None:
         """Class constructor."""
-        pass
+        verify_home_folder()
 
     def get_template_folder(self)->Path:
         """Retrieve the Template path.

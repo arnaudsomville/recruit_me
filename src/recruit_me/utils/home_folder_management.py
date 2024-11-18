@@ -18,6 +18,8 @@ def verify_home_folder()->None:
     template_folder = home_folder.joinpath('template_examples')
     if not template_folder.exists():
         shutil.copytree(Path(__file__).parents[1].joinpath('template_examples'),template_folder)
+    print("Home folder checked !")
+    home_folder.joinpath("Timmyyyyy.dummy").touch()
 
 if __name__ == '__main__': #pragma: no-cover
     verify_home_folder()

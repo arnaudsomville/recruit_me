@@ -53,3 +53,7 @@ python_files = ["test_*.py"]
 targets = [
     { os = "any", python = ">=3.11", platform = "any" }
 ]
+
+[tool.pdm.scripts]
+verify_home_folder = "python src/recruit_me/utils/home_folder_management.py"
+post_install = { shell = "pdm run verify_home_folder" }
