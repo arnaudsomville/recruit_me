@@ -6,12 +6,19 @@ from pathlib import Path
 import warnings
 import pandas as pd
 
-from recruit_me.models.data_models import AnswerType, DataframeEntryModel, EmailRecipient
+from recruit_me.models.data_models import (
+    AnswerType,
+    DataframeEntryModel,
+    EmailRecipient,
+)
 from recruit_me.utils.configuration import MainConfig
 
-#TODO : Transform into a DataframeManager class that automatically call retrieve_dataframe at init.
+# TODO : Transform into a DataframeManager class that automatically call retrieve_dataframe at init.
 
-def add_entry_to_dataframe(data: DataframeEntryModel, dataframe: pd.DataFrame)->pd.DataFrame:
+
+def add_entry_to_dataframe(
+    data: DataframeEntryModel, dataframe: pd.DataFrame
+) -> pd.DataFrame:
     """Add an entry to the Dataframe managing the sent emails. If the entry already exist, it will increment the amount of email sent.
 
     Args:
@@ -22,12 +29,17 @@ def add_entry_to_dataframe(data: DataframeEntryModel, dataframe: pd.DataFrame)->
 
     """
     if data.recipient.email in dataframe["recipient_email"].values:
-        dataframe.loc[dataframe["recipient_email"] == data.recipient.email, "last_sent"] = data.last_sent.isoformat()
-        dataframe.loc[dataframe["recipient_email"] == data.recipient.email, "amount_of_email_sent"] += 1
+        dataframe.loc[
+            dataframe["recipient_email"] == data.recipient.email, "last_sent"
+        ] = data.last_sent.isoformat()
+        dataframe.loc[
+            dataframe["recipient_email"] == data.recipient.email, "amount_of_email_sent"
+        ] += 1
     else:
         new_row = pd.DataFrame([data.to_dict()])
         dataframe = pd.concat([dataframe, new_row], ignore_index=True)
     return dataframe
+
 
 def retrieve_dataframe() -> pd.DataFrame:
     """Retrieve the dataframe from file.
@@ -35,14 +47,22 @@ def retrieve_dataframe() -> pd.DataFrame:
     Returns:
         pd.DataFrame: Retrieved Dataframe.
     """
-    expected_columns = DataframeEntryModel(
-        first_sent=datetime.now(),
-        last_sent=datetime.now(),
-        recipient=EmailRecipient(name="Test", email="test@example.com", company="TestCompany"),
-        answer=AnswerType.WAITING,
-        amount_of_email_sent=0
-    ).to_dict().keys()
-    dataframe_save_file = Path.home().joinpath(f'{MainConfig().home_folder}/{MainConfig().csv_file}')
+    expected_columns = (
+        DataframeEntryModel(
+            first_sent=datetime.now(),
+            last_sent=datetime.now(),
+            recipient=EmailRecipient(
+                name="Test", email="test@example.com", company="TestCompany"
+            ),
+            answer=AnswerType.WAITING,
+            amount_of_email_sent=0,
+        )
+        .to_dict()
+        .keys()
+    )
+    dataframe_save_file = Path.home().joinpath(
+        f"{MainConfig().home_folder}/{MainConfig().csv_file}"
+    )
     if dataframe_save_file.exists():
         dataframe = pd.read_csv(dataframe_save_file)
         if set(dataframe.columns) == set(expected_columns):
@@ -52,11 +72,11 @@ def retrieve_dataframe() -> pd.DataFrame:
             os.remove(str(dataframe_save_file))
             warnings.warn("Corrupted Dataframe save. Removing file.")
             return pd.DataFrame(columns=expected_columns)
-        
-    
+
     else:
-        #Dynamic retrieval of DataframeEntryModel columns to avoid useless future modifications.
+        # Dynamic retrieval of DataframeEntryModel columns to avoid useless future modifications.
         return pd.DataFrame(columns=expected_columns)
+
 
 def save_dataframe(dataframe: pd.DataFrame) -> bool:
     """Save the dataframe in the home folder.
@@ -68,14 +88,19 @@ def save_dataframe(dataframe: pd.DataFrame) -> bool:
         bool: True if everything went well.
     """
     try:
-        dataframe_save_file = Path.home().joinpath(f'{MainConfig().home_folder}/{MainConfig().csv_file}')
+        dataframe_save_file = Path.home().joinpath(
+            f"{MainConfig().home_folder}/{MainConfig().csv_file}"
+        )
         dataframe.to_csv(dataframe_save_file, index=False)
         return True
     except Exception as e:
         print(f"Error saving DataFrame: {e}")
         return False
 
-def update_response_status(email: str, status: AnswerType, dataframe: pd.DataFrame)->pd.DataFrame:
+
+def update_response_status(
+    email: str, status: AnswerType, dataframe: pd.DataFrame
+) -> pd.DataFrame:
     """Update the status of an answer
 
     Args:
@@ -84,11 +109,12 @@ def update_response_status(email: str, status: AnswerType, dataframe: pd.DataFra
         dataframe (pd.DataFrame): Dataframe.
 
     Returns:
-        pd.DataFrame: updated dataframe. 
+        pd.DataFrame: updated dataframe.
     """
     if email in dataframe["recipient_email"].values:
         dataframe.loc[dataframe["recipient_email"] == email, "answer"] = status
     return dataframe
+
 
 def dataframe_to_list(dataframe: pd.DataFrame) -> list[DataframeEntryModel]:
     """Convert the rows of the dataframe to a list of DataframeEntryModel.
@@ -106,7 +132,7 @@ def dataframe_to_list(dataframe: pd.DataFrame) -> list[DataframeEntryModel]:
             name=row["recipient_name"],
             email=row["recipient_email"],
             company=row["recipient_company"],
-            position=row["recipient_position"]
+            position=row["recipient_position"],
         )
 
         # Reconstruire l'objet DataframeEntryModel
@@ -115,13 +141,14 @@ def dataframe_to_list(dataframe: pd.DataFrame) -> list[DataframeEntryModel]:
             last_sent=datetime.fromisoformat(row["last_sent"]),
             recipient=recipient,
             answer=row["answer"],
-            amount_of_email_sent=row["amount_of_email_sent"]
+            amount_of_email_sent=row["amount_of_email_sent"],
         )
         result.append(entry)
 
     return result
 
-if __name__ == '__main__': #pragma: no-cover
+
+if __name__ == "__main__":  # pragma: no-cover
     dataframe_entries = [
         DataframeEntryModel(
             first_sent=datetime(2023, 1, 1, 10, 0),
@@ -130,10 +157,10 @@ if __name__ == '__main__': #pragma: no-cover
                 name="Homer Simpson",
                 email="homer@duffbrewery.com",
                 company="Duff Brewery",
-                position="Nuclear Safety Inspector"
+                position="Nuclear Safety Inspector",
             ),
             answer=AnswerType.WAITING,
-            amount_of_email_sent=3
+            amount_of_email_sent=3,
         ),
         DataframeEntryModel(
             first_sent=datetime(2023, 1, 5, 9, 0),
@@ -142,10 +169,10 @@ if __name__ == '__main__': #pragma: no-cover
                 name="Tony Stark",
                 email="ironman@starkindustries.com",
                 company="Stark Industries",
-                position="CEO"
+                position="CEO",
             ),
             answer=AnswerType.ACCEPTED,
-            amount_of_email_sent=2
+            amount_of_email_sent=2,
         ),
         DataframeEntryModel(
             first_sent=datetime(2023, 1, 10, 8, 0),
@@ -154,10 +181,10 @@ if __name__ == '__main__': #pragma: no-cover
                 name="Rick Sanchez",
                 email="rick@interdimensionalmail.com",
                 company="Interdimensional Inc.",
-                position="Mad Scientist"
+                position="Mad Scientist",
             ),
             answer=AnswerType.REFUSED,
-            amount_of_email_sent=4
+            amount_of_email_sent=4,
         ),
         DataframeEntryModel(
             first_sent=datetime(2023, 1, 15, 14, 0),
@@ -166,10 +193,10 @@ if __name__ == '__main__': #pragma: no-cover
                 name="Sherlock Holmes",
                 email="sherlock@bakerstreet.com",
                 company="Baker Street Detective Agency",
-                position="Consulting Detective"
+                position="Consulting Detective",
             ),
             answer=AnswerType.WAITING,
-            amount_of_email_sent=1
+            amount_of_email_sent=1,
         ),
         DataframeEntryModel(
             first_sent=datetime(2023, 1, 20, 13, 0),
@@ -178,11 +205,11 @@ if __name__ == '__main__': #pragma: no-cover
                 name="Darth Vader",
                 email="darth@empire.com",
                 company="Galactic Empire",
-                position="Sith Lord"
+                position="Sith Lord",
             ),
             answer=AnswerType.REFUSED,
-            amount_of_email_sent=5
-        )
+            amount_of_email_sent=5,
+        ),
     ]
     dataframe = pd.DataFrame(data=[data.to_dict() for data in dataframe_entries])
     assert save_dataframe(dataframe)
@@ -194,10 +221,10 @@ if __name__ == '__main__': #pragma: no-cover
             name="Mickey Mouse",
             email="mickey@disney.com",
             company="Disney Inc",
-            position="CEO"
+            position="CEO",
         ),
         answer=AnswerType.ACCEPTED,
-        amount_of_email_sent=50
+        amount_of_email_sent=50,
     )
     dataframe = retrieve_dataframe()
     dataframe = add_entry_to_dataframe(additional_data, dataframe)
