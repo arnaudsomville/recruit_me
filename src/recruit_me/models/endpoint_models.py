@@ -8,7 +8,7 @@ default_email_recipient = EmailRecipient(
     email='elonmusk@real_email.com',
     company='SpaceX',
     position='CEO'
-),
+)
 
 class EmailSendingEndpointModel(BaseModel):
     """Model used for the send_email endpoint"""

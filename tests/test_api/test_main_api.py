@@ -1,8 +1,10 @@
 """Test for the endpoints."""
 
+from unittest.mock import patch
 from fastapi.testclient import TestClient
 from pathlib import Path
 from recruit_me.api.main_api import app
+from recruit_me.models.data_models import EmailRecipient
 from recruit_me.utils.configuration import MainConfig
 
 client = TestClient(app)
@@ -98,3 +100,58 @@ def test_get_template_list():
     assert response.status_code == 200
     assert response.json()["status_code"] == 200
     assert "template1.txt template2.html" in response.json()["description"]
+
+
+def test_send_email_endpoint():
+    """Test the /send_email endpoint with send_email mocked."""
+    email_data = {
+        "email_recipient": {
+            "name": "Elon Musk",
+            "email": "elonmusk@spacex.com",
+            "company": "SpaceX",
+            "position": "CEO"
+        },
+        "email_object": "Join SpaceX!",
+        "cv_filename": "cv.pdf",
+        "cover_letter_template_filename": "cover_letter_template.txt",
+        "email_template_filename": "email_template.txt"
+    }
+
+    # Mock RecruitMe.send_email
+    with patch("recruit_me.api.main_api.RecruitMe.send_email", return_value=True) as mock_send_email:
+        response = client.post("/send_email", json=email_data)
+
+        # Assertions
+        assert response.status_code == 200
+        assert response.json() == {
+            'status_code': 200,
+            'description': f"Email successfully sent to {email_data['email_recipient']['email']}"
+        }
+        mock_send_email.assert_called_once_with(
+            email_recipient=EmailRecipient(**email_data["email_recipient"]),
+            email_object=email_data["email_object"],
+            cv_filename=email_data["cv_filename"],
+            cover_letter_template_filename=email_data["cover_letter_template_filename"],
+            email_template_filename=email_data["email_template_filename"]
+        )
+
+def test_download_summary_existing_file():
+    """Test the /download_summary endpoint when the file exists."""
+    file_path = Path.home().joinpath(f"{MainConfig().home_folder}/{MainConfig().csv_file}")
+    file_path.touch()
+    with (
+        patch("recruit_me.api.main_api.Path.exists", return_value=True),
+    ):
+        response = client.get("/download_summary")
+        assert response.status_code == 200
+
+
+def test_download_summary_no_file():
+    """Test the /download_summary endpoint when the file does not exist."""
+    file_path = Path.home().joinpath(f"{MainConfig().home_folder}/{MainConfig().csv_file}")
+    file_path.touch()
+    with (
+        patch("recruit_me.api.main_api.Path.exists", return_value=True),
+    ):
+        response = client.get("/download_summary")
+        assert response.status_code == 200

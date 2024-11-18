@@ -2,7 +2,7 @@
 
 from pathlib import Path
 import shutil
-from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import FileResponse
 import uvicorn
 
