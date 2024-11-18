@@ -72,7 +72,7 @@
 <span></span><span class="sd">&quot;&quot;&quot;File containing the base models used in rest api endpoints.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
-<span class="kn">from</span> <span class="nn">recruit_me.models.data_models</span> <span class="kn">import</span> <span class="n">EmailRecipient</span>
+<span class="kn">from</span> <span class="nn">recruit_me.models.data_models</span> <span class="kn">import</span> <span class="n">AnswerType</span><span class="p">,</span> <span class="n">EmailRecipient</span>
 
 <span class="n">default_email_recipient</span> <span class="o">=</span> <span class="n">EmailRecipient</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Elon Musk&#39;</span><span class="p">,</span>
@@ -90,6 +90,14 @@
     <span class="n">cv_filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;my_cv.pdf&#39;</span>
     <span class="n">cover_letter_template_filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;my_cover_letter_template.txt&#39;</span>
     <span class="n">email_template_filename</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;my_email_template.txt&#39;</span></div>
+
+
+<div class="viewcode-block" id="UpdateAnswerEndpointModel">
+<a class="viewcode-back" href="../../../recruit_me.models.endpoint_models.html#recruit_me.models.endpoint_models.UpdateAnswerEndpointModel">[docs]</a>
+<span class="k">class</span> <span class="nc">UpdateAnswerEndpointModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Model used for the update_answer model.&quot;&quot;&quot;</span>
+    <span class="n">email</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;elonmusk@real_email.com&#39;</span>
+    <span class="n">new_answer</span><span class="p">:</span> <span class="n">AnswerType</span> <span class="o">=</span> <span class="n">AnswerType</span><span class="o">.</span><span class="n">REFUSED</span> <span class="c1">#We are optimistic ☠️☠️☠️</span></div>
 
 </pre></div>
 

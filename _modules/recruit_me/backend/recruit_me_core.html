@@ -74,7 +74,7 @@
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
-<span class="kn">from</span> <span class="nn">recruit_me.backend.dataframe_manager</span> <span class="kn">import</span> <span class="n">add_entry_to_dataframe</span><span class="p">,</span> <span class="n">retrieve_dataframe</span><span class="p">,</span> <span class="n">save_dataframe</span>
+<span class="kn">from</span> <span class="nn">recruit_me.backend.dataframe_manager</span> <span class="kn">import</span> <span class="n">add_entry_to_dataframe</span><span class="p">,</span> <span class="n">retrieve_dataframe</span><span class="p">,</span> <span class="n">save_dataframe</span><span class="p">,</span> <span class="n">update_response_status</span>
 <span class="kn">from</span> <span class="nn">recruit_me.backend.email_sender</span> <span class="kn">import</span> <span class="n">send_email</span>
 <span class="kn">from</span> <span class="nn">recruit_me.backend.template_filler</span> <span class="kn">import</span> <span class="n">fill_gaps_in_template</span>
 <span class="kn">from</span> <span class="nn">recruit_me.models.data_models</span> <span class="kn">import</span> <span class="n">AnswerType</span><span class="p">,</span> <span class="n">DataframeEntryModel</span><span class="p">,</span> <span class="n">EmailModel</span><span class="p">,</span> <span class="n">EmailRecipient</span>
@@ -197,6 +197,21 @@
         <span class="n">dataframe</span> <span class="o">=</span> <span class="n">retrieve_dataframe</span><span class="p">()</span>
         <span class="n">dataframe</span> <span class="o">=</span> <span class="n">add_entry_to_dataframe</span><span class="p">(</span><span class="n">entry_model</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">save_dataframe</span><span class="p">(</span><span class="n">dataframe</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="RecruitMe.update_response_status">
+<a class="viewcode-back" href="../../../recruit_me.backend.recruit_me_core.html#recruit_me.backend.recruit_me_core.RecruitMe.update_response_status">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_response_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">answer</span><span class="p">:</span> <span class="n">AnswerType</span><span class="p">)</span><span class="o">-&gt;</span><span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            email (str): email of the recipient</span>
+<span class="sd">            answer (AnswerType): new type of answer</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dataframe</span> <span class="o">=</span> <span class="n">retrieve_dataframe</span><span class="p">()</span>
+        <span class="n">dataframe</span> <span class="o">=</span> <span class="n">update_response_status</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">answer</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">)</span>
+        <span class="n">save_dataframe</span><span class="p">(</span><span class="n">dataframe</span><span class="p">)</span></div>
 </div>
 
 </pre></div>

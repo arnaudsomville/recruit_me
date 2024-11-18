@@ -140,6 +140,43 @@ mapping of field names to [<cite>FieldInfo</cite>][pydantic.fields.FieldInfo] ob
 
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="recruit_me.models.endpoint_models.UpdateAnswerEndpointModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">recruit_me.models.endpoint_models.</span></span><span class="sig-name descname"><span class="pre">UpdateAnswerEndpointModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'elonmusk&#64;real_email.com'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_answer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="recruit_me.models.data_models.html#recruit_me.models.data_models.AnswerType" title="recruit_me.models.data_models.AnswerType"><span class="pre">AnswerType</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">AnswerType.REFUSED</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/recruit_me/models/endpoint_models.html#UpdateAnswerEndpointModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#recruit_me.models.endpoint_models.UpdateAnswerEndpointModel" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Model used for the update_answer model.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.endpoint_models.UpdateAnswerEndpointModel.email">
+<span class="sig-name descname"><span class="pre">email</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#recruit_me.models.endpoint_models.UpdateAnswerEndpointModel.email" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.endpoint_models.UpdateAnswerEndpointModel.model_computed_fields">
+<span class="sig-name descname"><span class="pre">model_computed_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ComputedFieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#recruit_me.models.endpoint_models.UpdateAnswerEndpointModel.model_computed_fields" title="Link to this definition"></a></dt>
+<dd><p>A dictionary of computed field names and their corresponding <cite>ComputedFieldInfo</cite> objects.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.endpoint_models.UpdateAnswerEndpointModel.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#recruit_me.models.endpoint_models.UpdateAnswerEndpointModel.model_config" title="Link to this definition"></a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.endpoint_models.UpdateAnswerEndpointModel.model_fields">
+<span class="sig-name descname"><span class="pre">model_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">FieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'email':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=False,</span> <span class="pre">default='elonmusk&#64;real_email.com'),</span> <span class="pre">'new_answer':</span> <span class="pre">FieldInfo(annotation=AnswerType,</span> <span class="pre">required=False,</span> <span class="pre">default=&lt;AnswerType.REFUSED:</span> <span class="pre">'REFUSED'&gt;)}</span></em><a class="headerlink" href="#recruit_me.models.endpoint_models.UpdateAnswerEndpointModel.model_fields" title="Link to this definition"></a></dt>
+<dd><p>Metadata about the fields defined on the model,
+mapping of field names to [<cite>FieldInfo</cite>][pydantic.fields.FieldInfo] objects.</p>
+<p>This replaces <cite>Model.__fields__</cite> from Pydantic V1.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="recruit_me.models.endpoint_models.UpdateAnswerEndpointModel.new_answer">
+<span class="sig-name descname"><span class="pre">new_answer</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="recruit_me.models.data_models.html#recruit_me.models.data_models.AnswerType" title="recruit_me.models.data_models.AnswerType"><span class="pre">AnswerType</span></a></em><a class="headerlink" href="#recruit_me.models.endpoint_models.UpdateAnswerEndpointModel.new_answer" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
 
 

@@ -93,9 +93,8 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">recipient</span><span class="o">.</span><span class="n">email</span> <span class="ow">in</span> <span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;recipient_email&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">recipient</span><span class="o">.</span><span class="n">email</span> <span class="ow">in</span> <span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;recipient_email&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
-            <span class="n">dataframe</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;recipient_email&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">data</span><span class="o">.</span><span class="n">recipient</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="s2">&quot;last_sent&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">last_sent</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
-            <span class="n">dataframe</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;recipient_email&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">data</span><span class="o">.</span><span class="n">recipient</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="s2">&quot;amount_of_email_sent&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">dataframe</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;recipient_email&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">data</span><span class="o">.</span><span class="n">recipient</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="s2">&quot;last_sent&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">last_sent</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+        <span class="n">dataframe</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;recipient_email&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">data</span><span class="o">.</span><span class="n">recipient</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="s2">&quot;amount_of_email_sent&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">new_row</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">data</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()])</span>
         <span class="n">dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">new_row</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -152,6 +151,24 @@
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error saving DataFrame: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="update_response_status">
+<a class="viewcode-back" href="../../../recruit_me.backend.dataframe_manager.html#recruit_me.backend.dataframe_manager.update_response_status">[docs]</a>
+<span class="k">def</span> <span class="nf">update_response_status</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="n">AnswerType</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update the status of an answer</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        email (str): Email of recipient.</span>
+<span class="sd">        status (AnswerType): Status of answer.</span>
+<span class="sd">        dataframe (pd.DataFrame): Dataframe.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: updated dataframe. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">email</span> <span class="ow">in</span> <span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;recipient_email&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
+        <span class="n">dataframe</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;recipient_email&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">email</span><span class="p">,</span> <span class="s2">&quot;answer&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">status</span>
+    <span class="k">return</span> <span class="n">dataframe</span></div>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span> <span class="c1">#pragma: no-cover</span>

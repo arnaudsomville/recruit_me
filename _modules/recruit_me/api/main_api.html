@@ -78,7 +78,7 @@
 <span class="kn">import</span> <span class="nn">uvicorn</span>
 
 <span class="kn">from</span> <span class="nn">recruit_me.backend.recruit_me_core</span> <span class="kn">import</span> <span class="n">RecruitMe</span>
-<span class="kn">from</span> <span class="nn">recruit_me.models.endpoint_models</span> <span class="kn">import</span> <span class="n">EmailSendingEndpointModel</span>
+<span class="kn">from</span> <span class="nn">recruit_me.models.endpoint_models</span> <span class="kn">import</span> <span class="n">EmailSendingEndpointModel</span><span class="p">,</span> <span class="n">UpdateAnswerEndpointModel</span>
 <span class="kn">from</span> <span class="nn">recruit_me.utils.configuration</span> <span class="kn">import</span> <span class="n">MainConfig</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span>
@@ -284,6 +284,26 @@
         <span class="n">media_type</span><span class="o">=</span><span class="s2">&quot;application/octet-stream&quot;</span><span class="p">,</span>
         <span class="n">filename</span><span class="o">=</span><span class="n">MainConfig</span><span class="p">()</span><span class="o">.</span><span class="n">csv_file</span>
     <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="update_answer">
+<a class="viewcode-back" href="../../../recruit_me.api.main_api.html#recruit_me.api.main_api.update_answer">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/update_answer&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">update_answer</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">UpdateAnswerEndpointModel</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">dict</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">RecruitMe</span><span class="p">()</span><span class="o">.</span><span class="n">update_response_status</span><span class="p">(</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">email</span><span class="p">,</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">new_answer</span>
+        <span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">STATUS_INTERNAL_ERROR</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Internal error : </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">STATUS_SUCCESS</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Data updated&#39;</span>
+    <span class="p">}</span></div>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span> <span class="c1">#pragma: no cover</span>
