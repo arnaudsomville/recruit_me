@@ -74,7 +74,7 @@
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
-<span class="kn">from</span> <span class="nn">recruit_me.backend.dataframe_manager</span> <span class="kn">import</span> <span class="n">add_entry_to_dataframe</span><span class="p">,</span> <span class="n">retrieve_dataframe</span><span class="p">,</span> <span class="n">save_dataframe</span><span class="p">,</span> <span class="n">update_response_status</span>
+<span class="kn">from</span> <span class="nn">recruit_me.backend.dataframe_manager</span> <span class="kn">import</span> <span class="n">add_entry_to_dataframe</span><span class="p">,</span> <span class="n">dataframe_to_list</span><span class="p">,</span> <span class="n">retrieve_dataframe</span><span class="p">,</span> <span class="n">save_dataframe</span><span class="p">,</span> <span class="n">update_response_status</span>
 <span class="kn">from</span> <span class="nn">recruit_me.backend.email_sender</span> <span class="kn">import</span> <span class="n">send_email</span>
 <span class="kn">from</span> <span class="nn">recruit_me.backend.template_filler</span> <span class="kn">import</span> <span class="n">fill_gaps_in_template</span>
 <span class="kn">from</span> <span class="nn">recruit_me.models.data_models</span> <span class="kn">import</span> <span class="n">AnswerType</span><span class="p">,</span> <span class="n">DataframeEntryModel</span><span class="p">,</span> <span class="n">EmailModel</span><span class="p">,</span> <span class="n">EmailRecipient</span>
@@ -212,6 +212,45 @@
         <span class="n">dataframe</span> <span class="o">=</span> <span class="n">retrieve_dataframe</span><span class="p">()</span>
         <span class="n">dataframe</span> <span class="o">=</span> <span class="n">update_response_status</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">answer</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">)</span>
         <span class="n">save_dataframe</span><span class="p">(</span><span class="n">dataframe</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="RecruitMe.relaunch_everyone">
+<a class="viewcode-back" href="../../../recruit_me.backend.recruit_me_core.html#recruit_me.backend.recruit_me_core.RecruitMe.relaunch_everyone">[docs]</a>
+    <span class="k">def</span> <span class="nf">relaunch_everyone</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">email_object</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">cv_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">cover_letter_template_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">email_template_filename</span><span class="p">:</span><span class="nb">str</span>
+        <span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Relaunch everyone who did not answer yet.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            email_object (str): Object of the emails.</span>
+<span class="sd">            cv_filename (str): Cv filename.</span>
+<span class="sd">            cover_letter_template_filename (str): cover letter template filename.</span>
+<span class="sd">            email_template_filename (str): email template filename.</span>
+<span class="sd">        </span>
+<span class="sd">        Return:</span>
+<span class="sd">            int: number of people relaunched</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dataframe</span> <span class="o">=</span> <span class="n">retrieve_dataframe</span><span class="p">()</span>
+        <span class="n">sent_email_list</span> <span class="o">=</span> <span class="n">dataframe_to_list</span><span class="p">(</span><span class="n">dataframe</span><span class="p">)</span>
+
+        <span class="n">people_relaunched</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">email_data</span> <span class="ow">in</span> <span class="n">sent_email_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">email_data</span><span class="o">.</span><span class="n">answer</span> <span class="o">!=</span> <span class="n">AnswerType</span><span class="o">.</span><span class="n">WAITING</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">send_email</span><span class="p">(</span>
+                <span class="n">email_data</span><span class="o">.</span><span class="n">recipient</span><span class="p">,</span>
+                <span class="n">email_object</span><span class="p">,</span>
+                <span class="n">cv_filename</span><span class="p">,</span>
+                <span class="n">cover_letter_template_filename</span><span class="p">,</span>
+                <span class="n">email_template_filename</span>
+            <span class="p">)</span>
+            <span class="n">people_relaunched</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">people_relaunched</span></div>
 </div>
 
 </pre></div>

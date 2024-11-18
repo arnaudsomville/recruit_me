@@ -78,7 +78,7 @@
 <span class="kn">import</span> <span class="nn">uvicorn</span>
 
 <span class="kn">from</span> <span class="nn">recruit_me.backend.recruit_me_core</span> <span class="kn">import</span> <span class="n">RecruitMe</span>
-<span class="kn">from</span> <span class="nn">recruit_me.models.endpoint_models</span> <span class="kn">import</span> <span class="n">EmailSendingEndpointModel</span><span class="p">,</span> <span class="n">UpdateAnswerEndpointModel</span>
+<span class="kn">from</span> <span class="nn">recruit_me.models.endpoint_models</span> <span class="kn">import</span> <span class="n">EmailContentEndpointModel</span><span class="p">,</span> <span class="n">EmailSendingEndpointModel</span><span class="p">,</span> <span class="n">UpdateAnswerEndpointModel</span>
 <span class="kn">from</span> <span class="nn">recruit_me.utils.configuration</span> <span class="kn">import</span> <span class="n">MainConfig</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span>
@@ -251,10 +251,10 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">RecruitMe</span><span class="p">()</span><span class="o">.</span><span class="n">send_email</span><span class="p">(</span>
         <span class="n">email_recipient</span><span class="o">=</span><span class="n">email_data</span><span class="o">.</span><span class="n">email_recipient</span><span class="p">,</span>
-        <span class="n">email_object</span><span class="o">=</span> <span class="n">email_data</span><span class="o">.</span><span class="n">email_object</span><span class="p">,</span>
-        <span class="n">cv_filename</span><span class="o">=</span><span class="n">email_data</span><span class="o">.</span><span class="n">cv_filename</span><span class="p">,</span>
-        <span class="n">cover_letter_template_filename</span><span class="o">=</span><span class="n">email_data</span><span class="o">.</span><span class="n">cover_letter_template_filename</span><span class="p">,</span>
-        <span class="n">email_template_filename</span><span class="o">=</span><span class="n">email_data</span><span class="o">.</span><span class="n">email_template_filename</span>
+        <span class="n">email_object</span><span class="o">=</span> <span class="n">email_data</span><span class="o">.</span><span class="n">email_content</span><span class="o">.</span><span class="n">email_object</span><span class="p">,</span>
+        <span class="n">cv_filename</span><span class="o">=</span><span class="n">email_data</span><span class="o">.</span><span class="n">email_content</span><span class="o">.</span><span class="n">cv_filename</span><span class="p">,</span>
+        <span class="n">cover_letter_template_filename</span><span class="o">=</span><span class="n">email_data</span><span class="o">.</span><span class="n">email_content</span><span class="o">.</span><span class="n">cover_letter_template_filename</span><span class="p">,</span>
+        <span class="n">email_template_filename</span><span class="o">=</span><span class="n">email_data</span><span class="o">.</span><span class="n">email_content</span><span class="o">.</span><span class="n">email_template_filename</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="p">{</span>
         <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">STATUS_SUCCESS</span><span class="p">,</span>
@@ -304,6 +304,31 @@
         <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">STATUS_SUCCESS</span><span class="p">,</span>
         <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Data updated&#39;</span>
     <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="relaunch_everyone">
+<a class="viewcode-back" href="../../../recruit_me.api.main_api.html#recruit_me.api.main_api.relaunch_everyone">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/relaunch_everyone&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">relaunch_everyone</span><span class="p">(</span><span class="n">email_data</span><span class="p">:</span> <span class="n">EmailContentEndpointModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Endpoint to relaunch everyone who is not marked as </span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        email_data (EmailSendingEndpointModel): Data containing the information on </span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        _type_: _description_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">people_relaunched</span> <span class="o">=</span> <span class="n">RecruitMe</span><span class="p">()</span><span class="o">.</span><span class="n">relaunch_everyone</span><span class="p">(</span>
+        <span class="n">email_object</span><span class="o">=</span> <span class="n">email_data</span><span class="o">.</span><span class="n">email_object</span><span class="p">,</span>
+        <span class="n">cv_filename</span><span class="o">=</span><span class="n">email_data</span><span class="o">.</span><span class="n">cv_filename</span><span class="p">,</span>
+        <span class="n">cover_letter_template_filename</span><span class="o">=</span><span class="n">email_data</span><span class="o">.</span><span class="n">cover_letter_template_filename</span><span class="p">,</span>
+        <span class="n">email_template_filename</span><span class="o">=</span><span class="n">email_data</span><span class="o">.</span><span class="n">email_template_filename</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="n">STATUS_SUCCESS</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Email successfully relaunched </span><span class="si">{</span><span class="n">people_relaunched</span><span class="si">}</span><span class="s1"> people&#39;</span>
+    <span class="p">}</span></div>
+
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span> <span class="c1">#pragma: no cover</span>

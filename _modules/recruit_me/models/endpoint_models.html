@@ -80,16 +80,23 @@
     <span class="n">company</span><span class="o">=</span><span class="s1">&#39;SpaceX&#39;</span><span class="p">,</span>
     <span class="n">position</span><span class="o">=</span><span class="s1">&#39;CEO&#39;</span>
 <span class="p">)</span>
+<div class="viewcode-block" id="EmailContentEndpointModel">
+<a class="viewcode-back" href="../../../recruit_me.models.endpoint_models.html#recruit_me.models.endpoint_models.EmailContentEndpointModel">[docs]</a>
+<span class="k">class</span> <span class="nc">EmailContentEndpointModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Model used for the send_email endpoint&quot;&quot;&quot;</span>
+    <span class="n">email_object</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Interest in Career Opportunity&#39;</span>
+    <span class="n">cv_filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;my_cv.pdf&#39;</span>
+    <span class="n">cover_letter_template_filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;my_cover_letter_template.txt&#39;</span>
+    <span class="n">email_template_filename</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;my_email_template.txt&#39;</span></div>
+
 
 <div class="viewcode-block" id="EmailSendingEndpointModel">
 <a class="viewcode-back" href="../../../recruit_me.models.endpoint_models.html#recruit_me.models.endpoint_models.EmailSendingEndpointModel">[docs]</a>
 <span class="k">class</span> <span class="nc">EmailSendingEndpointModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Model used for the send_email endpoint&quot;&quot;&quot;</span>
     <span class="n">email_recipient</span><span class="p">:</span> <span class="n">EmailRecipient</span> <span class="o">=</span> <span class="n">default_email_recipient</span>
-    <span class="n">email_object</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Interest in Career Opportunity&#39;</span>
-    <span class="n">cv_filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;my_cv.pdf&#39;</span>
-    <span class="n">cover_letter_template_filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;my_cover_letter_template.txt&#39;</span>
-    <span class="n">email_template_filename</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;my_email_template.txt&#39;</span></div>
+    <span class="n">email_content</span><span class="p">:</span> <span class="n">EmailContentEndpointModel</span></div>
+
 
 
 <div class="viewcode-block" id="UpdateAnswerEndpointModel">
