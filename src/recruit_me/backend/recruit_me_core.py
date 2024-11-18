@@ -3,7 +3,7 @@
 from datetime import datetime
 from pathlib import Path
 
-from recruit_me.backend.dataframe_manager import add_entry_to_dataframe, retrieve_dataframe, save_dataframe
+from recruit_me.backend.dataframe_manager import add_entry_to_dataframe, retrieve_dataframe, save_dataframe, update_response_status
 from recruit_me.backend.email_sender import send_email
 from recruit_me.backend.template_filler import fill_gaps_in_template
 from recruit_me.models.data_models import AnswerType, DataframeEntryModel, EmailModel, EmailRecipient
@@ -110,3 +110,15 @@ class RecruitMe:
         dataframe = retrieve_dataframe()
         dataframe = add_entry_to_dataframe(entry_model, dataframe)
         return save_dataframe(dataframe)
+
+    def update_response_status(self, email:str, answer: AnswerType)->None:
+        """_summary_
+
+        Args:
+            email (str): email of the recipient
+            answer (AnswerType): new type of answer
+
+        """
+        dataframe = retrieve_dataframe()
+        dataframe = update_response_status(email, answer, dataframe)
+        save_dataframe(dataframe)

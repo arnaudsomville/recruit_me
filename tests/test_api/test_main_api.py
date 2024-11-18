@@ -4,7 +4,7 @@ from unittest.mock import patch
 from fastapi.testclient import TestClient
 from pathlib import Path
 from recruit_me.api.main_api import app
-from recruit_me.models.data_models import EmailRecipient
+from recruit_me.models.data_models import AnswerType, EmailRecipient
 from recruit_me.utils.configuration import MainConfig
 
 client = TestClient(app)
@@ -155,3 +155,58 @@ def test_download_summary_no_file():
     ):
         response = client.get("/download_summary")
         assert response.status_code == 200
+
+def test_update_answer_success():
+    """Test the /update_answer endpoint with a successful update."""
+    
+    # Préparer les données de test
+    test_data = {
+        "email": "test@example.com",
+        "new_answer": AnswerType.ACCEPTED
+    }
+
+    # Mock de la méthode update_response_status
+    with patch("recruit_me.api.main_api.RecruitMe.update_response_status") as mock_update_response_status:
+        # Configurer le mock pour ne rien retourner
+        mock_update_response_status.return_value = None
+
+        # Appeler l'endpoint
+        response = client.post("/update_answer", json=test_data)
+
+        # Vérifier la réponse
+        assert response.status_code == 200
+        assert response.json() == {
+            'status_code': 200,
+            'description': 'Data updated'
+        }
+
+        # Vérifier l'appel du mock
+        mock_update_response_status.assert_called_once_with(
+            test_data["email"], test_data["new_answer"]
+        )
+def test_update_answer_failure():
+    """Test the /update_answer endpoint when an error occurs."""
+    
+    # Préparer les données de test
+    test_data = {
+        "email": "test@example.com",
+        "new_answer": AnswerType.ACCEPTED
+    }
+
+    # Mock de la méthode update_response_status pour qu'elle raise une exception
+    with patch("recruit_me.api.main_api.RecruitMe.update_response_status") as mock_update_response_status:
+        mock_update_response_status.side_effect = RuntimeError("Mocked exception")
+
+        # Appeler l'endpoint
+        response = client.post("/update_answer", json=test_data)
+
+        # Vérifier la réponse
+        assert response.json() == {
+            'status_code': 500,
+            'description': 'Internal error : Mocked exception'
+        }
+
+        # Vérifier l'appel du mock
+        mock_update_response_status.assert_called_once_with(
+            test_data["email"], test_data["new_answer"]
+        )

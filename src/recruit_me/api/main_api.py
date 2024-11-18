@@ -7,7 +7,7 @@ from fastapi.responses import FileResponse
 import uvicorn
 
 from recruit_me.backend.recruit_me_core import RecruitMe
-from recruit_me.models.endpoint_models import EmailSendingEndpointModel
+from recruit_me.models.endpoint_models import EmailSendingEndpointModel, UpdateAnswerEndpointModel
 from recruit_me.utils.configuration import MainConfig
 
 app = FastAPI(
@@ -193,6 +193,23 @@ def download_summary() -> FileResponse:
         media_type="application/octet-stream",
         filename=MainConfig().csv_file
     )
+
+@app.post('/update_answer')
+def update_answer(data: UpdateAnswerEndpointModel)->dict:
+    try:
+        RecruitMe().update_response_status(
+            data.email,
+            data.new_answer
+        )
+    except Exception as e:
+        return {
+            'status_code': STATUS_INTERNAL_ERROR,
+            'description': f'Internal error : {e}'
+        }
+    return {
+        'status_code': STATUS_SUCCESS,
+        'description': 'Data updated'
+    }
 
 if __name__ == '__main__': #pragma: no cover
     uvicorn.run("main_api:app", host="0.0.0.0", port=8100, reload=True)

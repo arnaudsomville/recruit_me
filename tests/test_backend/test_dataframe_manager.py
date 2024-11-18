@@ -7,7 +7,7 @@ from pathlib import Path
 import shutil
 import pandas.testing as pdt
 import pandas as pd
-from recruit_me.backend.dataframe_manager import add_entry_to_dataframe, retrieve_dataframe, save_dataframe
+from recruit_me.backend.dataframe_manager import add_entry_to_dataframe, retrieve_dataframe, save_dataframe, update_response_status
 from recruit_me.models.data_models import AnswerType, DataframeEntryModel, EmailRecipient
 from recruit_me.utils.configuration import MainConfig
 from tests.conftest import dummy_dataframe_entries, expected_columns
@@ -245,3 +245,27 @@ def test_add_entry_to_dataframe_existing_row()->None:
     
     retrieved_df = add_entry_to_dataframe(added_data, retrieved_base_df)
     pdt.assert_frame_equal(retrieved_df, expected_dataframe)
+
+def test_update_response_status():
+    """Test the update_response_status method."""
+
+    # Initialisation du DataFrame
+    expected_dataframe = pd.DataFrame(data=[data.to_dict() for data in dummy_dataframe_entries])
+
+    # Cas nominal : mise à jour du statut pour un email existant
+    updated_dataframe = update_response_status(
+        email="homer@duffbrewery.com",
+        status=AnswerType.ACCEPTED,
+        dataframe=expected_dataframe.copy()
+    )
+    expected_dataframe.loc[expected_dataframe["recipient_email"] == "homer@duffbrewery.com", "answer"] = AnswerType.ACCEPTED
+    pdt.assert_frame_equal(updated_dataframe, expected_dataframe)
+
+    # Cas non nominal : l'email n'existe pas
+    updated_dataframe = update_response_status(
+        email="unknown@example.com",
+        status=AnswerType.REFUSED,
+        dataframe=expected_dataframe.copy()
+    )
+    # Le DataFrame reste inchangé
+    pdt.assert_frame_equal(updated_dataframe, expected_dataframe)

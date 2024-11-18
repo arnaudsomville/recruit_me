@@ -17,13 +17,13 @@ def create_dummy_csv() -> None:
     """Create a dummy CSV file with email data."""
     dataframe_save_file = Path.home().joinpath(f'{MainConfig().home_folder}/{MainConfig().csv_file}')
     data = [
-        ["first_sent", "last_sent", "recipient_company", "recipient_name", "recipient_position", "recipient_email", "amount_of_email_sent"],
-        ["2023-01-01T10:00:00", "2023-01-02T15:30:00", "Duff Brewery", "Homer Simpson", "Nuclear Safety Inspector", "homer@duffbrewery.com", 3],
-        ["2023-01-05T09:00:00", "2023-01-06T11:00:00", "Stark Industries", "Tony Stark", "CEO", "ironman@starkindustries.com", 2],
-        ["2023-01-10T08:00:00", "2023-01-12T16:45:00", "Interdimensional Inc.", "Rick Sanchez", "Mad Scientist", "rick@interdimensionalmail.com", 4],
-        ["2023-01-15T14:00:00", "2023-01-15T18:00:00", "Baker Street Detective Agency", "Sherlock Holmes", "Consulting Detective", "sherlock@bakerstreet.com", 1],
-        ["2023-01-20T13:00:00", "2023-01-21T17:30:00", "Galactic Empire", "Darth Vader", "Sith Lord", "darth@empire.com", 5],
-        ["2023-01-20T13:00:00", "2023-01-21T17:30:00", "Disney Inc", "Mickey Mouse", "CEO", "mickey@disney.com", 50]
+        ["first_sent", "last_sent", "recipient_company", "recipient_name", "recipient_position", "recipient_email", "amount_of_email_sent", "answer"],
+        ["2023-01-01T10:00:00", "2023-01-02T15:30:00", "Duff Brewery", "Homer Simpson", "Nuclear Safety Inspector", "homer@duffbrewery.com", 3, "WAITING"],
+        ["2023-01-05T09:00:00", "2023-01-06T11:00:00", "Stark Industries", "Tony Stark", "CEO", "ironman@starkindustries.com", 2, "ACCEPTED"],
+        ["2023-01-10T08:00:00", "2023-01-12T16:45:00", "Interdimensional Inc.", "Rick Sanchez", "Mad Scientist", "rick@interdimensionalmail.com", 4, "REFUSED"],
+        ["2023-01-15T14:00:00", "2023-01-15T18:00:00", "Baker Street Detective Agency", "Sherlock Holmes", "Consulting Detective", "sherlock@bakerstreet.com", 1, 'WAITING'],
+        ["2023-01-20T13:00:00", "2023-01-21T17:30:00", "Galactic Empire", "Darth Vader", "Sith Lord", "darth@empire.com", 5, "REFUSED"],
+        ["2023-01-20T13:00:00", "2023-01-21T17:30:00", "Disney Inc", "Mickey Mouse", "CEO", "mickey@disney.com", 50, "ACCEPTED"]
     ]
 
     with open(dataframe_save_file, mode='w', newline='') as file:

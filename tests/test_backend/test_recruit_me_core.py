@@ -3,7 +3,7 @@
 from pathlib import Path
 from unittest.mock import mock_open, patch
 from recruit_me.backend.recruit_me_core import RecruitMe
-from recruit_me.models.data_models import EmailRecipient
+from recruit_me.models.data_models import AnswerType, EmailRecipient
 from recruit_me.utils.configuration import MainConfig
 
 
@@ -113,3 +113,32 @@ def test_send_email_success():
 
         # Assertions
         assert result is True
+
+def test_update_response_status():
+    """Test the update_response_status method with mocked external functions."""
+
+    # Préparer les données de test
+    email = "test@example.com"
+    answer = AnswerType.ACCEPTED
+
+    # Instancier la classe RecruitMe
+    recruit_me = RecruitMe()
+
+    # Mock des appels externes
+    with (
+        patch("recruit_me.backend.recruit_me_core.retrieve_dataframe") as mock_retrieve_dataframe,
+        patch("recruit_me.backend.recruit_me_core.update_response_status") as mock_update_response_status,
+        patch("recruit_me.backend.recruit_me_core.save_dataframe") as mock_save_dataframe,
+    ):
+        # Configurer les retours des mocks
+        mock_dataframe = "Mocked DataFrame"
+        mock_retrieve_dataframe.return_value = mock_dataframe
+        mock_update_response_status.return_value = mock_dataframe
+
+        # Appeler la méthode sous test
+        recruit_me.update_response_status(email, answer)
+
+        # Vérifier les appels des mocks
+        mock_retrieve_dataframe.assert_called_once()
+        mock_update_response_status.assert_called_once_with(email, answer, mock_dataframe)
+        mock_save_dataframe.assert_called_once_with(mock_dataframe)

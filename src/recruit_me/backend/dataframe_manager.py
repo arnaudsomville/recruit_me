@@ -20,9 +20,8 @@ def add_entry_to_dataframe(data: DataframeEntryModel, dataframe: pd.DataFrame)->
 
     """
     if data.recipient.email in dataframe["recipient_email"].values:
-        if data.recipient.email in dataframe["recipient_email"].values:
-            dataframe.loc[dataframe["recipient_email"] == data.recipient.email, "last_sent"] = data.last_sent.isoformat()
-            dataframe.loc[dataframe["recipient_email"] == data.recipient.email, "amount_of_email_sent"] += 1
+        dataframe.loc[dataframe["recipient_email"] == data.recipient.email, "last_sent"] = data.last_sent.isoformat()
+        dataframe.loc[dataframe["recipient_email"] == data.recipient.email, "amount_of_email_sent"] += 1
     else:
         new_row = pd.DataFrame([data.to_dict()])
         dataframe = pd.concat([dataframe, new_row], ignore_index=True)
@@ -73,6 +72,21 @@ def save_dataframe(dataframe: pd.DataFrame) -> bool:
     except Exception as e:
         print(f"Error saving DataFrame: {e}")
         return False
+
+def update_response_status(email: str, status: AnswerType, dataframe: pd.DataFrame)->pd.DataFrame:
+    """Update the status of an answer
+
+    Args:
+        email (str): Email of recipient.
+        status (AnswerType): Status of answer.
+        dataframe (pd.DataFrame): Dataframe.
+
+    Returns:
+        pd.DataFrame: updated dataframe. 
+    """
+    if email in dataframe["recipient_email"].values:
+        dataframe.loc[dataframe["recipient_email"] == email, "answer"] = status
+    return dataframe
 
 if __name__ == '__main__': #pragma: no-cover
     dataframe_entries = [

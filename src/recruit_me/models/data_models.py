@@ -47,4 +47,5 @@ class DataframeEntryModel(BaseModel):
             'recipient_position': self.recipient.position,
             'recipient_email': self.recipient.email,
             'amount_of_email_sent': self.amount_of_email_sent,
+            'answer': self.answer,
         }
