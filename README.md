@@ -1,6 +1,7 @@
 # Kezako
-recruit_me project permit the automatization and the following of the spontaneous applications send to people and the sending of reminders when no answer (with a following of the amount of email sent, the date...)
-This automatization is possible by automatically filling templates used for emails and cover letters.
+The **Recruit Me project** streamlines and automates the process of managing spontaneous job applications. It enables efficient tracking of applications sent, including the number of follow-up emails, response status, and key dates.
+
+This automation is achieved by leveraging templates to generate personalized emails and cover letters, saving time and ensuring consistency in communication.
 
 # Documentation
 The current version of the CI is generating a documentation using sphinx and is accessible [`here`](https://arnaudsomville.github.io/recruit_me/)
