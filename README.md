@@ -2,6 +2,10 @@
 recruit_me project permit the automatization and the following of the spontaneous applications send to people and the sending of reminders when no answer (with a following of the amount of email sent, the date...)
 This automatization is possible by automatically filling templates used for emails and cover letters.
 
+# Documentation
+The current version of the CI is generating a documentation using sphinx and is accessible [`here`](https://arnaudsomville.github.io/recruit_me/)
+There is still work to be done here as the documentation is really basic for now. 
+
 # Installation
 
 1. To setup the environnement, make sure to install miniconda https://docs.anaconda.com/miniconda/miniconda-install/
