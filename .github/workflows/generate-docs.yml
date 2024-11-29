@@ -2,8 +2,7 @@ name: Build, Test, and Deploy Documentation
 
 on:
   push:
-    branches:
-      - main
+    branches: {}
   pull_request: {}
 
 permissions:
@@ -83,6 +82,7 @@ jobs:
         with:
           name: recruit_me-docker-image
           path: docker-save.tar
+
 
   build-and-deploy-docs:
     needs: build-and-test
