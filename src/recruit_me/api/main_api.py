@@ -14,12 +14,20 @@ from recruit_me.models.endpoint_models import (
 )
 from recruit_me.utils.configuration import MainConfig
 
+def app_lifespan(app: FastAPI):
+    print("🚀 Starting Recruit_me API...")
+    print(f'Using those credentials : {MainConfig().user}')
+    yield
+    print("🛑 Shutting down Recruit_me API...")
+
 app = FastAPI(
     title="Recruit_me",
     description="Program that automates the process of sending CVs and tracking the status of submitted applications.",
     summary="Life is to short to have to spend energy on sending CVs.",
     version="0.0.1",
+    lifespan=app_lifespan,
 )
+
 
 STATUS_SUCCESS = 200
 STATUS_FILE_ALREADY_EXISTS = 409
@@ -234,5 +242,3 @@ def relaunch_everyone(email_data: EmailContentEndpointModel):
     }
 
 
-if __name__ == "__main__":  # pragma: no cover
-    uvicorn.run("main_api:app", host="0.0.0.0", port=8100, reload=True)

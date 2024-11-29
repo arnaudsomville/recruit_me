@@ -6,6 +6,7 @@ from typing import ClassVar
 import warnings
 from confz import ConfigSource, BaseConfig, EnvSource, FileSource
 from confz.base_config import BaseConfigMetaclass
+from pydantic import SecretStr
 
 _DEFAULT_CONF_FILE_PATH = Path.home().joinpath(".recruit_me/configuration.yaml")
 _TEMPLATE_CONF_FILE_PATH = (
@@ -38,7 +39,7 @@ class EmailConf(BaseConfig, metaclass=BaseConfigMetaclass):
 
     name: str
     email: str
-    password: str
+    password: SecretStr
     smtp_server: str
     smtp_port: int
 

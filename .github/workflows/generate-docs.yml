@@ -52,6 +52,37 @@ jobs:
           echo '```' >> $GITHUB_STEP_SUMMARY
           cat $GITHUB_STEP_SUMMARY
           exit $TEST_EXIT_CODE
+  build-docker-image:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/') || contains(github.event.head_commit.message, 'generate_image')
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: |
+          docker build -t recruit_me .
+
+      - name: Test Docker image
+        run: |
+          docker run --rm -d --name test_recruit_me -p 8080:8080 recruit_me
+          sleep 5 # Allow container to start
+          if ! curl -f http://localhost:8080; then
+            echo "Docker container failed to start."
+            docker logs test_recruit_me
+            exit 1
+          fi
+          docker stop test_recruit_me
+
+      - name: Save Docker image as artifact
+        run: |
+          docker save recruit_me > docker-save.tar
+      - name: Upload Docker image artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: recruit_me-docker-image
+          path: docker-save.tar
 
   build-and-deploy-docs:
     needs: build-and-test
