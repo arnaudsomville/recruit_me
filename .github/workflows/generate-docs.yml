@@ -64,9 +64,9 @@ jobs:
 
       - name: Test Docker image
         run: |
-          docker run --rm -d --name test_recruit_me -p 8080:8080 recruit_me
+          docker run --rm -d --name test_recruit_me -p 8080:8080 -e CONF_USER__NAME="John Doe" -e CONF_USER__PASSWORD="securepassword" -e CONF_USER__EMAIL="john.doe@example.com" -e CONF_USER__SMTP_SERVER="smtp.example.com" -e CONF_USER__SMTP_PORT=587 recruit_me
           sleep 5 # Allow container to start
-          if ! curl -f http://localhost:8080; then
+          if ! curl -f http://localhost:8080/health; then
             echo "Docker container failed to start."
             docker logs test_recruit_me
             exit 1
