@@ -1,8 +1,7 @@
 name: Build, Test, and Deploy Documentation
 
 on:
-  push:
-    branches: {}
+  push: {}
   pull_request: {}
 
 permissions:
