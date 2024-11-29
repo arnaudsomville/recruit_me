@@ -4,7 +4,6 @@ from pathlib import Path
 import shutil
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import FileResponse
-import uvicorn
 
 from recruit_me.backend.recruit_me_core import RecruitMe
 from recruit_me.models.endpoint_models import (
@@ -14,11 +13,13 @@ from recruit_me.models.endpoint_models import (
 )
 from recruit_me.utils.configuration import MainConfig
 
+
 def app_lifespan(app: FastAPI):
     print("🚀 Starting Recruit_me API...")
-    print(f'Using those credentials : {MainConfig().user}')
+    print(f"Using those credentials : {MainConfig().user}")
     yield
     print("🛑 Shutting down Recruit_me API...")
+
 
 app = FastAPI(
     title="Recruit_me",
@@ -240,5 +241,3 @@ def relaunch_everyone(email_data: EmailContentEndpointModel):
         "status_code": STATUS_SUCCESS,
         "description": f"Email successfully relaunched {people_relaunched} people",
     }
-
-
