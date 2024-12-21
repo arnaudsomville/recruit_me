@@ -18,7 +18,7 @@ _CONF_FILE_ENV_VAR_NAME = "RECRUIT_ME_CONF_FILE_PATH"
 def get_config_file_path() -> Path:
     """Get configuration file path.
 
-    If the env var is set MPC_CONF_FILE_PATH, it reads the CONF_FILE from there.
+    If the env var is set RECRUIT_ME_CONF_FILE_PATH, it reads the CONF_FILE from there.
     Otherwise, it uses the default path in _DEFAULT_CONF_FILE_PATH
 
     """
